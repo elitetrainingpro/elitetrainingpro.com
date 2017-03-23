@@ -4,6 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+    "hash": "3f6f5b4173b5773ef4488b8f707516db2dbf5d40",
     "content-hash": "96098e473b028cdb2529580554a1ae3e",
     "packages": [
         {
@@ -1096,7 +1097,11 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2017-03-06T19:30:27+00:00"
+=======
+            "time": "2017-03-06 19:30:27"
+>>>>>>> 3f6f5b4173b5773ef4488b8f707516db2dbf5d40
         },
         {
             "name": "symfony/css-selector",
@@ -1149,7 +1154,11 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2017-02-21T09:12:04+00:00"
+=======
+            "time": "2017-02-21 09:12:04"
+>>>>>>> 3f6f5b4173b5773ef4488b8f707516db2dbf5d40
         },
         {
             "name": "symfony/debug",
@@ -1206,7 +1215,11 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2017-02-18T17:28:00+00:00"
+=======
+            "time": "2017-02-18 17:28:00"
+>>>>>>> 3f6f5b4173b5773ef4488b8f707516db2dbf5d40
         },
         {
             "name": "symfony/event-dispatcher",
@@ -1266,7 +1279,11 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2017-02-21T09:12:04+00:00"
+=======
+            "time": "2017-02-21 09:12:04"
+>>>>>>> 3f6f5b4173b5773ef4488b8f707516db2dbf5d40
         },
         {
             "name": "symfony/finder",
@@ -1315,7 +1332,11 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2017-02-21T09:12:04+00:00"
+=======
+            "time": "2017-02-21 09:12:04"
+>>>>>>> 3f6f5b4173b5773ef4488b8f707516db2dbf5d40
         },
         {
             "name": "symfony/http-foundation",
@@ -1368,7 +1389,11 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2017-03-04T12:23:14+00:00"
+=======
+            "time": "2017-03-04 12:23:14"
+>>>>>>> 3f6f5b4173b5773ef4488b8f707516db2dbf5d40
         },
         {
             "name": "symfony/http-kernel",
@@ -1450,7 +1475,11 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2017-03-10T18:35:31+00:00"
+=======
+            "time": "2017-03-10 18:35:31"
+>>>>>>> 3f6f5b4173b5773ef4488b8f707516db2dbf5d40
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1558,7 +1587,11 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2017-03-04T12:23:14+00:00"
+=======
+            "time": "2017-03-04 12:23:14"
+>>>>>>> 3f6f5b4173b5773ef4488b8f707516db2dbf5d40
         },
         {
             "name": "symfony/routing",
@@ -1633,7 +1666,11 @@
                 "uri",
                 "url"
             ],
+<<<<<<< HEAD
             "time": "2017-03-02T15:58:09+00:00"
+=======
+            "time": "2017-03-02 15:58:09"
+>>>>>>> 3f6f5b4173b5773ef4488b8f707516db2dbf5d40
         },
         {
             "name": "symfony/translation",
@@ -1697,7 +1734,11 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2017-03-04T12:23:14+00:00"
+=======
+            "time": "2017-03-04 12:23:14"
+>>>>>>> 3f6f5b4173b5773ef4488b8f707516db2dbf5d40
         },
         {
             "name": "symfony/var-dumper",
@@ -1763,7 +1804,11 @@
                 "debug",
                 "dump"
             ],
+<<<<<<< HEAD
             "time": "2017-02-20T13:45:48+00:00"
+=======
+            "time": "2017-02-20 13:45:48"
+>>>>>>> 3f6f5b4173b5773ef4488b8f707516db2dbf5d40
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -3283,7 +3328,11 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2017-03-07T16:47:02+00:00"
+=======
+            "time": "2017-03-07 16:47:02"
+>>>>>>> 3f6f5b4173b5773ef4488b8f707516db2dbf5d40
         },
         {
             "name": "webmozart/assert",
