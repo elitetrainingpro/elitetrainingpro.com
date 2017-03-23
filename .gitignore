@@ -5,6 +5,7 @@
 .project
 .env.example
 .buildpath
+composer.lock
 desktop.ini
 /public/build
 /public/js
