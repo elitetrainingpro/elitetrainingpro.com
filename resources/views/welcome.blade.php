@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    EliteTraingPro Coming Soon!
+                    EliteTrainingPro Coming Soon!
                 </div>
 
                 <div class="links">
