@@ -86,6 +86,7 @@
                     <a href="http://www.hunterjmarshall.com/">Hunter Marshall</a>
                     <a href="http://www.wvmon.com">William Montesseoca</a>
                     <a href="https://github.com/elitetrainingpro/elitetrainingpro.com">GitHub</a>
+					<a href= "http://www.jaortiz.com">Janine Ortiz</a>
                 </div>
             </div>
         </div>
