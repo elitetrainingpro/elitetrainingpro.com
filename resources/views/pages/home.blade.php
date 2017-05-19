@@ -1,4 +1,4 @@
 @extends('layouts.default')
 @section('content')
-    i am the welcome page page
+    i am the home page
 @stop
