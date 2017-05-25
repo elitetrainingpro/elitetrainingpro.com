@@ -1,0 +1,93 @@
+.navbar {
+	border-radius: 0px;
+}
+.nav-background {
+	background-color:gray;
+}
+
+.grad {
+	background: #4D4D4D; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(#4D4D4D, #A1A1A1); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(#4D4D4D, #A1A1A1); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(#4D4D4D, #A1A1A1); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(#4D4D4D, #A1A1A1); /* Standard syntax */
+}
+a.icon-link {
+	color: white;
+	text-decoration: none;
+	font-size:25px;
+	font-family:GARAMOND;
+	vertical-align:middle;
+} /* unvisited link */
+a.icon-link:visited {color: white;}   /* visited link */
+a.icon-link:hover {color: white;}     /* mouse over link */
+a.icon-link:active {color: white;}    /* selected link */
+a.nav-list {
+	color: white;
+	text-decoration: none;
+	font-size:20px;
+	font-family:GARAMOND;
+	padding: 10px;
+}
+.nav-center {
+	text-align:center;
+}
+.nav-right {
+	text-align:right;
+}
+.navbar-default {
+	background:none;
+	width:100%;
+	border:none;
+	z-index:1;
+}
+.navbar-default .navbar-nav>li>a {
+	color:#ffffff;
+	font-size:18px;
+}
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a.active{
+	background:#98a1a4;
+	color:#000000;
+}
+@media screen and (max-width: 767px){
+	.navbar-collapse{background:rgba(0,0,0,0.8);}
+}
+.user-name {
+	color:#ffffff;
+	line-height: 20px;
+}
+.text-center {
+	text-align:center;
+}
+.float-right {
+	float:right;
+}
+.navbar-toggle {
+	position: relative;
+	float: right;
+	padding: 9px 10px;
+	margin-top: 8px;
+	margin-right: 15px;
+	margin-bottom: 8px;
+	background-color: white;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+footer {
+	position:absolute;
+	bottom:0;
+	width:100%;
+}
+.footer-position {
+	position: relative;
+	border: 1px solid transparent;
+}
+.text-copyright {
+	color: white;
+	text-decoration: none;
+	font-size:18px;
+	font-family:GARAMOND;
+	margin: auto;
+}
