@@ -17,11 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('password');
-            $table->string('image');
-            $table->boolean('needs_password_reset');
-            $table->string('user_guide')->unique();
-            $table->boolean('is_coach');
+            $table->string('password', 60);
             $table->rememberToken();
             $table->timestamps();
         });
