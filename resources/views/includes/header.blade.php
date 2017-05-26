@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8">
-				<img src="assets/images/elitetrainingpro.png" alt="No image found" height="50px" width="50px">
+				<img src="{{ URL::asset('assets/images/elitetrainingpro.png') }}" alt="No image found" height="50px" width="50px">
 				<a class="icon-link" id="logo" href="/">Elite Training Pro</a>
 			</div>
 			<div class="col-sm-4 text-center">
