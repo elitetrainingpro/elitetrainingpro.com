@@ -13,10 +13,13 @@ class CoachRoleTypesTableSeeder extends Seeder
     {
         DB::table('coach_role_types')->insert([
             [
-                'name' => 'Nutrionist'
+                'name' => 'Athletic Trainer',
             ],
             [
-                'name' => 'Power Trainer'
+                'name' => 'Weight Loss Trainer',
+            ],
+            [
+            	'name' => 'Rehabilitation Trainer',
             ]
         ]);
     }
