@@ -2,7 +2,7 @@
 <meta name="description" content="Training application that allows for a more efficient connection between the trainer and the athlete.">
 <meta name="author" content="Hunter Marshall">
 
-<title>Elite Training Pro</title>
+<title>ETP @yield('title')</title>
 
 <!-- load bootstrap from a cdn -->
 <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/3.0.3/css/bootstrap-combined.min.css">-->
@@ -15,6 +15,3 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<link media="all" type="text/css" rel="stylesheet" href="{{ URL::asset('assets/css/header.css') }}"></link>
-<script src="{{ URL::asset('assets/js/calendar.js') }}"></script>
