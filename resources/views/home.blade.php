@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Home Page</div>
 
-                <div class="panel-body">
+               <div class="panel-body">
                     You are logged in!
                 </div>
             </div>

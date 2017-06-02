@@ -1,3 +1,4 @@
+<!-- Needs to be DELETED when done -->
 @extends('layouts.app')
 
 @section('content')
