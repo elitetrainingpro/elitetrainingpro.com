@@ -1,16 +1,17 @@
 <!doctype html>
 <html>
 <head>
-    @include('includes.head')
+    @include('includes._head')
+    @yield('stylesheets')
+    @yield('scripts')
 </head>
 <body>
-    @include('includes.header')
+    @include('includes._header')
     <div id="main">
         @yield('content')
     </div>
     <footer class="row">
-        @include('includes.footer')
+        @include('includes._footer')
     </footer>
-</div>
 </body>
 </html>

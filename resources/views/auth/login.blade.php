@@ -1,5 +1,77 @@
 @extends('layouts.app')
 
+@section('stylesheets')
+    <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/homie.css') }}" rel="stylesheet">
+@endsection
+
+@section('scripits')
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
+    <script src="{{ asset('js/app.js') }}"></script>
+@endsection
+
+@section('navbar')
+	<nav class="navbar navbar-default navbar-static-top">
+	    <div class="container">
+	        <div class="navbar-header">
+	
+	            <!-- Collapsed Hamburger -->
+	            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+	                <span class="sr-only">Toggle Navigation</span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	            </button>
+	
+	            <!-- Branding Image -->
+	            <a class="navbar-brand" href="{{ url('/') }}">
+	                {{ config('app.name', 'Elite Training Pro') }}
+	            </a>
+	        </div>
+	
+	        <div class="collapse navbar-collapse" id="app-navbar-collapse">
+	            <!-- Left Side Of Navbar -->
+	            <ul class="nav navbar-nav">
+	                &nbsp;
+	            </ul>
+	
+	            <!-- Right Side Of Navbar -->
+	            <ul class="nav navbar-nav navbar-right">
+	                <!-- Authentication Links -->
+	                @if (Auth::guest())
+	                <li><a data-toggle="modal" data-target="#login" href="#login">Login</a></li>
+	                <li><a data-toggle="modal" data-target="#create" href="#create">Register</a></li>
+	                @else
+	                <li class="dropdown">
+	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+	                        {{ Auth::user()->name }} <span class="caret"></span>
+	                    </a>
+	
+	                    <ul class="dropdown-menu" role="menu">
+	                        <li>
+	                            <a href="{{ route('logout') }}"
+	                                onclick="event.preventDefault();
+	                                document.getElementById('logout-form').submit();">
+	                                Logout
+	                            </a>
+	
+	                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+	                                {{ csrf_field() }}
+	                            </form>
+	                        </li>
+	                    </ul>
+	                </li>
+	                @endif
+	            </ul>
+	        </div>
+	    </div>
+	</nav>
+@endsection
+
 @section('content')
 <!-- Login Stuff Begins-->
 <div class="modal fade" id="login" role="dialog">
@@ -161,13 +233,21 @@
 <div id="about" class="container-fluid">
   <div class="row">
     <div class="col-sm-8">
-      <h2>About Company Page</h2><br>
-      <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4><br>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <br><button class="btn btn-default btn-lg">Get in Touch</button>
+      <h2>About Elite Training Pro</h2>
+      <p>
+      	Elite Training Pro allows for athletes and trainers to connect in such way that it results in better 
+      	communication and more efficient training. ETP allows for athletes to keep track of their daily activities, while giving
+      	the trainer a central location to keep track of all their athletes, and provide a more efficent way for them to provide feedback
+      	about an athlete's activities.
+      </p>
+      <p>
+      	Athletes can set goals, keep track of their daily activities, and make notes for the trainer to see. Trainers are then able to
+      	view all the athletes data, and provide feedback to the athlete. This will help to provide the best personalized training 
+      	for the athlete, while providing a central location of all the athletes a trainer may have.
+      </p>
     </div>
     <div class="col-sm-4">
-      <span class="glyphicon glyphicon-signal logo"></span>
+      	<img src="{{ URL::asset('assets/images/elitetrainingpro.png') }}" alt="No image found" height="300px" width="300px">
     </div>
   </div>
 </div>
@@ -175,19 +255,21 @@
 <div class="container-fluid bg-grey">
   <div class="row">
     <div class="col-sm-4">
-      <span class="glyphicon glyphicon-globe logo slideanim"></span>
+      	<img src="{{ URL::asset('assets/images/Our-Values.png') }}" alt="No image found" height="300px" width="300px">
     </div>
     <div class="col-sm-8">
-      <h2>Our Values</h2><br>
-      <h4><strong>MISSION:</strong> Our mission lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4><br>
-      <p><strong>VISION:</strong> Our vision Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <h2>Our Values</h2>
+      <h4><strong>MISSION:</strong> Our mission is to bridge the gap between the athlete and trainer, allowing the best possible training for the athlete.</h4><br>
+      <p><strong>VISION:</strong>
+      Our vision is to provide the tools to athletes and trainers that will provide the best training for the athlete, and make the job of the trainer to be more 
+      efficient. We strive to see our athletes achieve their goals, and our products do just that.
+      </p>
     </div>
   </div>
 </div>
 
 <!-- Container (Services Section) -->
-<div id="services" class="container-fluid text-center">
+<!-- <div id="services" class="container-fluid text-center">
   <h2>SERVICES</h2>
   <h4>What we offer</h4>
   <br>
@@ -226,10 +308,10 @@
       <p>Lorem ipsum dolor sit amet..</p>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- Container (Portfolio Section) -->
-<div id="portfolio" class="container-fluid text-center bg-grey">
+<!-- <div id="portfolio" class="container-fluid text-center bg-grey">
   <h2>Portfolio</h2><br>
   <h4>What we have created</h4>
   <div class="row text-center slideanim">
@@ -254,7 +336,7 @@
         <p>Yes, San Fran is ours</p>
       </div>
     </div>
-  </div><br>
+  </div><br> -->
   
   <h2>What our customers say</h2>
   <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
@@ -385,13 +467,6 @@
 <!--     </div> -->
 <!--   </div> -->
 <!-- </div> -->
-
-<footer class="container-fluid text-center">
-  <a href="#myPage" title="To Top">
-    <span class="glyphicon glyphicon-chevron-up"></span>
-  </a>
-  <p>Bootstrap Theme Made By <a href="https://www.w3schools.com" title="Visit w3schools">www.w3schools.com</a></p>
-</footer>
 
 <script>
 $(document).ready(function(){
