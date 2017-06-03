@@ -4,6 +4,7 @@
 
 <title>ETP @yield('title')</title>
 
+<link rel="icon" href="{{ URL::asset('assets/images/logo.png') }}" type="image/x-icon">
 <!-- load bootstrap from a cdn -->
 <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/3.0.3/css/bootstrap-combined.min.css">-->
 
