@@ -16,12 +16,13 @@ class CreateBiosTable extends Migration
         Schema::create('bios', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('role_id')->unsigned();
-            $table->integer('coach_role_type_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('email')->unique();
+            $table->string('city');
+            $table->string('state');
+            $table->string('bio');
+            $table->string('identity');
             $table->timestamps();
-            $table->foreign('role_id')->references('role_id')->on('roles');
-            $table->foreign('coach_role_type_id')->references('coach_role_type_id')->on('coach_role_types');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Auth;
+use App\Bio;
 
 class BioController extends Controller
 {
@@ -13,9 +16,9 @@ class BioController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.bio');
     }
-
+ 
     /**
      * Show the form for creating a new resource.
      *
@@ -23,7 +26,7 @@ class BioController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.bio');
     }
 
     /**
@@ -34,7 +37,27 @@ class BioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate the data
+        $this->validate($request, array(
+        	'city' => 'required|max:191',
+        	'state' => 'required',
+        	'bio' => 'required|max:191',
+        	'identity' => 'required'
+        ));
+        
+        // store in the database
+        $bio = new Bio;
+        $bio->user_id = Auth::user()->id;
+        $bio->email = Auth::user()->email;
+        $bio->city = $request->city;
+        $bio->state = $request->state;
+        $bio->bio = $request->bio;
+        $bio->identity = $request->identity;
+        
+        $bio->save();
+        
+        // redirect to another page
+        return redirect()->route('bios.show', '$bio->id');
     }
 
     /**
@@ -45,7 +68,7 @@ class BioController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('pages.home');
     }
 
     /**
