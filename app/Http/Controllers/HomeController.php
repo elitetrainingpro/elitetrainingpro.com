@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('pages.home');
+    	$userBio = DB::table('bios')->where('email', Auth::user()->email)->first();
+
+		// Check to see if there was a row returned from the database.
+    	if ($userBio != NULL) {
+    		// Check to see if the identity column is not null
+	    	if ($userBio->identity != NULL) {
+	    		return view('pages.home');
+	    	}else { // If identity is nulll then go to bio page (This should never ever happen)
+	    		return view('pages.bio');
+	    	}
+        } else {
+        	return view('pages.bio');
+        }
     }
 }
