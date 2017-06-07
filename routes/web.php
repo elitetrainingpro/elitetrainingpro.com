@@ -21,3 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('athletes', 'PagesController@getAthletes');
 Route::get('athletecalendar', 'PagesController@getCalendar');
 Route::get('notifications', 'PagesController@getNotifications');
+Route::resource('bios', 'BioController');
