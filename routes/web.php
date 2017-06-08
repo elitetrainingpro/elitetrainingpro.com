@@ -19,6 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('athletes', 'PagesController@getAthletes');
-Route::get('athletecalendar', 'PagesController@getCalendar');
+Route::get('coachcalendar', 'PagesController@getCoachCalendar');
 Route::get('notifications', 'PagesController@getNotifications');
+Route::get('athletecalendar', 'PagesController@getAthleteCalendar');
+Route::get('goals', 'PagesController@getGoals');
+Route::get('schedule', 'PagesController@getSchedules');
 Route::resource('bios', 'BioController');
