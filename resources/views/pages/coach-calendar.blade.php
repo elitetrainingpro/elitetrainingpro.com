@@ -11,9 +11,9 @@
 @endsection
 
 @section('navlinks')
-    <li><a class="active" href="athletecalendar"><i class="fa fa-map fa"></i>Calendar</a></li>
-	<li><a href="goals"><i class="fa fa-home fa"></i>Goals</a></li>
-    <li><a href="schedule"><i class="fa fa-map fa"></i>Schedule</a></li>
+	<li><a href="athletes"><i class="fa fa-home fa"></i>Athletes</a></li>
+    <li><a class="active" href="coachcalendar"><i class="fa fa-map fa"></i>Calendar</a></li>
+    <li><a href="notifications"><i class="fa fa-bolt fa"></i>Notifications</a></li>
 @endsection
 
 @section('content')

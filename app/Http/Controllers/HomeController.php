@@ -31,8 +31,12 @@ class HomeController extends Controller
     	if ($userBio != NULL) {
     		// Check to see if the identity column is not null
 	    	if ($userBio->identity != NULL) {
-	    		return view('pages.home');
-	    	}else { // If identity is nulll then go to bio page (This should never ever happen)
+	    		if ($userBio->identity == 'Coach'){
+	    			return view('pages.home');
+	    		} else {
+	    			return view('pages.athletes-home');
+	    		}
+	    	}else { // If identity is null then go to bio page (This should never ever happen)
 	    		return view('pages.bio');
 	    	}
         } else {
