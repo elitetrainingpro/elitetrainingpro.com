@@ -25,16 +25,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-    	$userBio = DB::table('bios')->where('email', Auth::user()->email)->first();
+    	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
 
 		// Check to see if there was a row returned from the database.
-    	if ($userBio != NULL) {
+    	if ($bio != NULL) {
     		// Check to see if the identity column is not null
-	    	if ($userBio->identity != NULL) {
-	    		if ($userBio->identity == 'Coach'){
-	    			return view('pages.home');
+	    	if ($bio->identity != NULL) {
+	    		if ($bio->identity == 'Coach'){
+	    			return view('pages.home')->with('bio', $bio);
 	    		} else {
-	    			return view('pages.athletes-home');
+	    			return view('pages.athletes-home')->with('bio', $bio);
 	    		}
 	    	}else { // If identity is null then go to bio page (This should never ever happen)
 	    		return view('pages.bio');

@@ -72,16 +72,9 @@ class BioController extends Controller
         
         $bio->save();
         
+        return redirect()->route('bios.show', $bio->id);
         // redirect to another page
-        if ($bio->identity != NULL) {
-	    	if ($bio->identity == 'Coach'){
-	    		return view('pages.home');
-	    	} else {
-	    		return view('pages.athletes-home');
-	    	}
-	    }else { // If identity is null then go to bio page (This should never ever happen)
-	    	return view('pages.bio');
-	    }
+        
     }
 
     /**
@@ -93,6 +86,17 @@ class BioController extends Controller
     public function show($id)
     {
     	//
+    	$bio = Bio::find($id); //print_r($bio);die();
+    	
+    	if ($bio->identity != NULL) {
+	    	if ($bio->identity == 'Coach'){
+	    		return view('pages.home')->with('bio', $bio);
+	    	} else {
+	    		return view('pages.athletes-home')->with('bio', $bio);
+	    	}
+	    }else { // If identity is null then go to bio page (This should never ever happen)
+	    	return view('pages.bio');
+	    }
     }
 
     /**
