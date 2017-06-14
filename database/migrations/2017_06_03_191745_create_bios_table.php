@@ -17,6 +17,7 @@ class CreateBiosTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('email')->unique();
+            $table->string('image')->nullable();
             $table->string('city');
             $table->string('state');
             $table->string('bio');
