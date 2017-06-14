@@ -65,7 +65,6 @@ class BioController extends Controller
         	Image::make($image)->resize(800, 400)->save($location);
         	
         	$bio->image = $filename;
-        	return View::make('pages.home')->with('image', $image);
         }
         else {
         	return view('pages.bio');
