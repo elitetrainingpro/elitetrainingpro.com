@@ -8,12 +8,22 @@
 
 @section('scripts')
  {!! Html::script('assets/js/parsley.min.js') !!}
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=rmgyrwthrrr2h5weft0b1mllmieqrg3hmdrsg58sym44ure3"></script>
+    <script>
+    tinymce.init({
+        selector: 'textarea',
+        plugins: 'link',
+        menubar: false
+        });
+    </script>
 @endsection
 
 @section('content')
 <div class="container">
 	<div class="row">
-		{!! Form::open(['route' => 'bios.store', 'data-parsley-validate' => '']) !!}
+		{!! Form::open(['route' => 'bios.store', 'data-parsley-validate' => '', 'files' => true]) !!}
+			{{ Form::label('image', 'Upload Image (Less than 2 MB):') }}
+			{{ Form::file('image') }}
 		    {{ Form::label('city', 'City') }}
 		    {{ Form::text('city', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '191']) }}
 		    
