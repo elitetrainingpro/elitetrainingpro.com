@@ -1,9 +1,10 @@
 @extends('layouts.default')
 
-@section('title', '| Home')
+@section('title', '| Find Trainer')
 
 @section('stylesheets')
 	<link media="all" type="text/css" rel="stylesheet" href="{{ URL::asset('assets/css/header.css') }}"></link>
+	<link media="all" type="text/css" rel="stylesheet" href="{{ URL::asset('assets/css/findTrainer.css') }}"></link>
 @endsection
 
 @section('navlinks')
@@ -16,9 +17,8 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-12">
-			<h1>This is the athlete's home page.</h1>
-			<img src="{{ URL::asset('assets/avatars/' . $bio->image) }}" alt="No image found" height="50px" width="50px">
-			<a class="btn btn-primary" href="findtrainer">Find Trainer</a>
+			<h1>This is the Find Trainer page.</h1>
+			<input type="text" name="search" placeholder="Search..">
 		</div>
 	</div>
 </div>
