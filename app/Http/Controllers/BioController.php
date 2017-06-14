@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Auth;
 use App\Bio;
+use Image;
+use Purifier;
 
 class BioController extends Controller
 {
@@ -42,7 +45,8 @@ class BioController extends Controller
         	'city' => 'required|max:191',
         	'state' => 'required',
         	'bio' => 'required|max:191',
-        	'identity' => 'required'
+        	'identity' => 'required',
+        	'image' => 'sometimes|image'
         ));
         
         // store in the database
@@ -51,13 +55,33 @@ class BioController extends Controller
         $bio->email = Auth::user()->email;
         $bio->city = $request->city;
         $bio->state = $request->state;
-        $bio->bio = $request->bio;
+        $bio->bio = Purifier::clean($request->bio);
         $bio->identity = $request->identity;
+
+        if ($request->hasFile('image')) {
+        	$image = $request->file('image');
+        	$filename = time() . '.' . $image->getClientOriginalExtension();
+        	$location = public_path('assets/avatars/' . $filename);
+        	Image::make($image)->resize(800, 400)->save($location);
+        	
+        	$bio->image = $filename;
+        }
+        else {
+        	return view('pages.bio');
+        }
         
         $bio->save();
         
         // redirect to another page
-        return redirect()->route('bios.show', '$bio->id');
+        if ($bio->identity != NULL) {
+	    	if ($bio->identity == 'Coach'){
+	    		return view('pages.home');
+	    	} else {
+	    		return view('pages.athletes-home');
+	    	}
+	    }else { // If identity is null then go to bio page (This should never ever happen)
+	    	return view('pages.bio');
+	    }
     }
 
     /**
@@ -68,7 +92,7 @@ class BioController extends Controller
      */
     public function show($id)
     {
-        return view('pages.home');
+    	//
     }
 
     /**

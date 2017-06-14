@@ -6,7 +6,7 @@
                 <a class="icon-link" id="logo" href="/">Elite Training Pro</a>
             </div>
             <div class="col-sm-4 text-center">
-                <h4 class="user-name">Trainer: 
+                <h4 class="user-name">Welcome
                     <span id="user_name">
                         @if( Auth::check() )
                         {{ Auth::user()->name }}
