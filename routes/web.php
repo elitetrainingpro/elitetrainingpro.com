@@ -24,5 +24,6 @@ Route::get('notifications', 'PagesController@getNotifications');
 Route::get('athletecalendar', 'PagesController@getAthleteCalendar');
 Route::get('goals', 'PagesController@getGoals');
 Route::get('schedule', 'PagesController@getSchedules');
+Route::post('search_code', 'FindTrainerController@search_code');
 Route::resource('findtrainer', 'FindTrainerController');
 Route::resource('bios', 'BioController');

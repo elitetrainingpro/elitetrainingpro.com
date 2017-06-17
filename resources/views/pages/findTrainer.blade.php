@@ -17,9 +17,21 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-12">
-			<h1>This is the Find Trainer page.</h1>
-			<input type="text" name="search" placeholder="Search..">
+			<form action="search_code" method="post">
+			<input type="text" name="search_code" placeholder="Search...">
+<!-- 			<input type="submit" name="submit" value="search"> -->
+			</form><br><br>
 		</div>
+	</div>
+	<div class="row">
+	<div class="col-md-8">	
+	@foreach($findTrainers as $findTrainers)
+	<div class="panel panel-default">
+    <div class="panel-heading"><h3><img src="{{ URL::asset('assets/avatars/' . $findTrainers->image) }}" alt="No image found" height="75px" width="75px" style="border-radius:50%"> {{ $findTrainers->name }} <button>+</button></h3></div>
+    <div class="panel-body">{{ $findTrainers->city }}, {{ $findTrainers->state }} {{ $findTrainers->email }} <br> {{ substr(strip_tags($findTrainers->bio),0, 300) }}{{ strlen(strip_tags($findTrainers->bio)) > 150 ? "..." : ""}}</div>
+  </div>
+	@endforeach
+	</div>
 	</div>
 </div>
 @endsection

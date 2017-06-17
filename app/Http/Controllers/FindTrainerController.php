@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Auth;
 
 class FindTrainerController extends Controller
 {
@@ -13,7 +15,13 @@ class FindTrainerController extends Controller
      */
     public function index()
     {
-    	return view('pages.findTrainer');
+    	$findTrainers = DB::table('bios')
+    					->join('users', function ($findTrainers) {
+    						$findTrainers->on('bios.user_id', '=', 'users.id')
+    						->where('bios.identity', 'Coach');
+    					})
+    					->get();
+    	return view('pages.findTrainer')->with('findTrainers', $findTrainers);
     }
 
     /**
@@ -80,5 +88,12 @@ class FindTrainerController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function search_code(Request $request)
+    {
+    	$Search = $request->search_code;
+    	$searches = DB::table('users')->where('name', 'like', '$Search')->get();
+    	return view('pages.findTrainer', compact('findTrainers'));
     }
 }
