@@ -16,7 +16,7 @@ class CreateWorkoutTable extends Migration
         Schema::create('workout', function (Blueprint $table) {
             $table->increments('workout_id');
             $table->integer('user_id')->unsigned();
-            $table->integer('workout_type_id')->unsigned();
+            $table->integer('workout_type')->unsigned();
             $table->dateTimeTz('date');
             $table->foreign('user_id')->references('id')->on('users');
         });

@@ -61,7 +61,7 @@ class BioController extends Controller
         if ($request->hasFile('image')) {
         	$image = $request->file('image');
         	$filename = time() . '.' . $image->getClientOriginalExtension();
-        	$location = public_path('assets/avatars/' . $filename);
+        	$location = public_path('assets/avatars/uploads/' . $filename);
         	Image::make($image)->resize(800, 400)->save($location);
         	
         	$bio->image = $filename;

@@ -14,7 +14,7 @@ class CreateFlexibilityWorkoutTable extends Migration
     public function up()
     {
         Schema::create('flexibility_workout', function (Blueprint $table) {
-            $table->increments('balance_workout_id');
+            $table->increments('flexibility_workout_id');
             $table->integer('workout_id')->unsigned();
             $table->string('name');
             $table->decimal('time', 3, 2);
