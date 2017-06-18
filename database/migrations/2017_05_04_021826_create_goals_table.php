@@ -24,7 +24,7 @@ class CreateGoalsTable extends Migration
             $table->dateTimeTz('end_date');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('goal_type_id')->references('goal_type_id')->on('goal_types');
-            $table->foreign('goal_interval_id')->references('goal_interval_id')->on('goal_interval');
+            $table->foreign('goal_interval_id')->references('goal_interval_id')->on('goal_intervals');
         });
     }
 
