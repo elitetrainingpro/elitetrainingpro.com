@@ -5,6 +5,22 @@
 	background: -moz-linear-gradient(#4D4D4D, #A1A1A1); /* For Firefox 3.6 to 15 */
 	background: linear-gradient(#4D4D4D, #A1A1A1); /* Standard syntax */
 }
+.icon-link {
+	color: white;
+    text-decoration: none;
+    font-size: 25px;
+    font-family: GARAMOND;
+    vertical-align: middle;
+	
+}
+.icon-link:hover {
+	color: white;
+    text-decoration: none;
+    font-size: 25px;
+    font-family: GARAMOND;
+    vertical-align: middle;
+	
+}
 .icon-style {
 	color: white;
 	font-size:25px;
