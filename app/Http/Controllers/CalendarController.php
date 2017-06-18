@@ -20,7 +20,8 @@ class CalendarController extends Controller
      */
     public function index()
     {
-    	return view('pages.athlete-calendar');
+    	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
+    	return view('pages.athlete-calendar')->with('bio', $bio);
     }
 
     /**
@@ -30,7 +31,8 @@ class CalendarController extends Controller
      */
     public function create()
     {
-    	return view('pages.athlete-calendar');
+    	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
+    	return view('pages.athlete-calendar')->with('bio', $bio);
     }
 
     /**
@@ -41,7 +43,6 @@ class CalendarController extends Controller
      */
     public function store(Request $request)
     {
-    	
     	// Determine what form is being submitted.
     	if ($request->has('submit_strength')) {
     		

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Auth;
 
 class PagesController extends Controller
 {
@@ -11,26 +13,32 @@ class PagesController extends Controller
 	}
 	
 	public function getAthletes() {
-		return view('pages.athletes');
+		$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
+		return view('pages.athletes')->with('bio', $bio);
 	}
 	
 	public function getCoachCalendar() {
-		return view('pages.coach-calendar');
+		$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
+		return view('pages.coach-calendar')->with('bio', $bio);
 	}
 	
 	public function getNotifications() {
-		return view('pages.notifications');
+		$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
+		return view('pages.notifications')->with('bio', $bio);
 	}
 	
 	public function getAthleteCalendar() {
-		return view('pages.athlete-calendar');
+		$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
+		return view('pages.athlete-calendar')->with('bio', $bio);
 	}
 	
 	public function getGoals() {
-		return view('pages.goals');
+		$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
+		return view('pages.goals')->with('bio', $bio);
 	}
 	
 	public function getSchedules() {
-		return view('pages.schedule');
+		$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
+		return view('pages.schedule')->with('bio', $bio);
 	}
 }
