@@ -11,3 +11,4 @@ desktop.ini
 /public/js
 *.map
 /auth.json
+/public/assets/avatars/uploads

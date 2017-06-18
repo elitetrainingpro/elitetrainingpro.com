@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAthleteToCoachTable extends Migration
+class CreateAthleteToCoachesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAthleteToCoachTable extends Migration
      */
     public function up()
     {
-        Schema::create('athlete_to_coach', function (Blueprint $table) {
+        Schema::create('athlete_to_coaches', function (Blueprint $table) {
             $table->increments('athlete_to_coach_id');
             $table->integer('athlete_id')->unsigned();
             $table->integer('coach_id')->unsigned();
@@ -30,6 +30,6 @@ class CreateAthleteToCoachTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('athlete_to_coach');
+        Schema::dropIfExists('athlete_to_coaches');
     }
 }

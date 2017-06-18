@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGoalIntervalTable extends Migration
+class CreateGoalIntervalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateGoalIntervalTable extends Migration
      */
     public function up()
     {
-        Schema::create('goal_interval', function (Blueprint $table) {
+        Schema::create('goal_intervals', function (Blueprint $table) {
             $table->increments('goal_interval_id');
             $table->string('period');
         });
@@ -26,6 +26,6 @@ class CreateGoalIntervalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('goal_interval');
+        Schema::dropIfExists('goal_intervals');
     }
 }

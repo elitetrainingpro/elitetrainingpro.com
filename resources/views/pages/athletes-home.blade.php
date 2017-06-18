@@ -17,6 +17,8 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<h1>This is the athlete's home page.</h1>
+			<img src="{{ URL::asset('assets/avatars/uploads/' . $bio->image) }}" alt="No image found" height="50px" width="50px">
+			<a class="btn btn-primary" href="findtrainer">Find Trainer</a>
 		</div>
 	</div>
 </div>
