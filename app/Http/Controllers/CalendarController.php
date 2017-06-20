@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use App\StrengthWorkout;
 use App\EnduranceWorkout;
+use App\TrainingNote;
 use Image;
 use Purifier;
 
@@ -88,10 +89,33 @@ class CalendarController extends Controller
     	}else if ($request->has('submit_balance')) {
     		//handle form2
     		print_r("balance");die();
-    	}else if ($request->has('submit_notes')) {
-    		//handle form2
-    		print_r("notes");die();
-    	}
+    	}else if ($request->has('submit_training_notes')) {
+
+            // validate the data
+            $this->validate($request, array(
+                    'name' => 'required|max:191',
+                    'notes' => 'required',
+                    'date' => 'required'
+            ));
+         
+            //store in the Training Notes table
+            $note = new TrainingNote;
+            $note->user_id = Auth::user()->id;
+            $note->name= $request->name;
+            $note->notes = $request->notes;
+            $note->date = $request->date;
+            $note->save();
+
+        }else if ($request->has('submit_nutrition_notes')) {
+            //handle form2
+            print_r("trainingNotes");die();
+        }else if ($request->has('submit_medical_notes')) {
+            //handle form2
+            print_r("trainingNotes");die();
+        }else if ($request->has('submit_notes')) {
+            //handle form2
+            print_r("notes");die();
+        }
     }
 
     /**

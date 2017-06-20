@@ -25,6 +25,7 @@ class CreateCoachFeedbacksTable extends Migration
             $table->foreign('athlete_to_coach_id')->references('athlete_to_coach_id')->on('athlete_to_coaches');
             $table->foreign('coach_id')->references('id')->on('users');
             $table->foreign('note_type_id')->references('note_type_id')->on('note_types');
+ 
         });
     }
 
