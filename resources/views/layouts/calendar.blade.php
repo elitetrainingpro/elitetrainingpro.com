@@ -97,8 +97,27 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Add Note</h4>
 				</div>
+				<!--Notes Tabs -->
+				<ul class="nav nav-tabs" id="tabContent">
+					<li class="active"><a href="#training" data-toggle="tab">Training</a></li>
+					<li><a href="#nutrition" data-toggle="tab">Nutrition</a></li>
+					<li><a href="#medical" data-toggle="tab">Medical</a><li>
+				</ul>
 				<div class="modal-body">
-					@yield('notes')
+					<div class="tab-content">
+						<!-- Training Tab in Modal-->
+						<div class="tab-pane active" id="training">
+							@yield('trainingNotes')
+						</div>
+						<!-- Nutrition Tab in Modal-->
+						<div class="tab-pane" id="nutrition">
+							@yield('nutritionNotes')
+						</div>
+						<!-- Medical Tab in Modal-->
+						<div class="tab-pane" id="medical">
+							@yield('medicalNotes')
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
