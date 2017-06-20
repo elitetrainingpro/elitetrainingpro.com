@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use App\FlexibilityWorkout;
+use App\BalanceWorkout;
 use App\StrengthWorkout;
 use App\EnduranceWorkout;
 use App\TrainingNote;
@@ -83,12 +85,39 @@ class CalendarController extends Controller
     		$workout->event_time= $request->event_time;
     		$workout->date = $request->date;
     		$workout->save();
-    	}else if ($request->has('submit_flexability')) {
-    		//handle form2
-    		print_r("flexability");die();
+    		
+    	}else if ($request->has('submit_flexibility')) {
+    		$this->validate($request, array(
+    				'name' => 'required|max:191',
+    				'time' => 'required',
+    				'sets' => 'required',
+    				'date' => 'required'
+    		));
+    		
+    		$workout = new FlexibilityWorkout;
+    		$workout->user_id = Auth::user()->id;
+    		$workout->name = $request->name;
+    		$workout->time = $request->time;
+    		$workout->sets= $request->sets;
+    		$workout->date = $request->date;
+    		$workout->save();
+    		
     	}else if ($request->has('submit_balance')) {
-    		//handle form2
-    		print_r("balance");die();
+    		$this->validate($request, array(
+    				'name' => 'required|max:191',
+    				'time' => 'required',
+    				'sets' => 'required',
+    				'date' => 'required'
+    		));
+    		
+    		//store in the Endurance Workout table
+    		$workout = new BalanceWorkout;
+    		$workout->user_id = Auth::user()->id;
+    		$workout->name = $request->name;
+    		$workout->time = $request->time;
+    		$workout->sets= $request->sets;
+    		$workout->date = $request->date;
+    		$workout->save();
     	}else if ($request->has('submit_training_notes')) {
 
             // validate the data
@@ -106,15 +135,6 @@ class CalendarController extends Controller
             $note->date = $request->date;
             $note->save();
 
-        }else if ($request->has('submit_nutrition_notes')) {
-            //handle form2
-            print_r("trainingNotes");die();
-        }else if ($request->has('submit_medical_notes')) {
-            //handle form2
-            print_r("trainingNotes");die();
-        }else if ($request->has('submit_notes')) {
-            //handle form2
-            print_r("notes");die();
         }
     }
 
