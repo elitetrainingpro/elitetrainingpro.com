@@ -14,14 +14,15 @@ class CreateBalanceWorkoutsTable extends Migration
     public function up()
     {
         Schema::create('balance_workouts', function (Blueprint $table) {
-        	$table->increments('balance_workout_id');
-        	$table->integer('user_id')->unsigned();
-        	$table->string('name');
-        	$table->float('time');
-        	$table->integer('sets');
-        	$table->dateTimeTz('date');
-        	$table->timestamps();
-        	$table->foreign('user_id')->references('id')->on('users');
+            $table->increments('balance_workout_id');
+            $table->integer('user_id')->unsigned();
+            $table->string('name');
+            $table->decimal('time', 3, 2);
+            $table->text('notes');
+            $table->integer('sets');
+            $table->dateTimeTz('date');
+            $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

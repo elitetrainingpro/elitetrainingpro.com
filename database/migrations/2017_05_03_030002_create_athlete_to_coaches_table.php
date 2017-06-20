@@ -14,12 +14,12 @@ class CreateAthleteToCoachesTable extends Migration
     public function up()
     {
         Schema::create('athlete_to_coaches', function (Blueprint $table) {
-        	$table->increments('athlete_to_coach_id');
-        	$table->integer('athlete_id')->unsigned();
-        	$table->integer('coach_id')->unsigned();
-        	$table->boolean('still_connected');
-        	$table->foreign('athlete_id')->references('id')->on('users');
-        	$table->foreign('coach_id')->references('id')->on('users');
+            $table->increments('athlete_to_coach_id');
+            $table->integer('athlete_id')->unsigned();
+            $table->integer('coach_id')->unsigned();
+            $table->boolean('still_connected');
+            $table->foreign('athlete_id')->references('id')->on('users');
+            $table->foreign('coach_id')->references('id')->on('users');
         });
     }
 

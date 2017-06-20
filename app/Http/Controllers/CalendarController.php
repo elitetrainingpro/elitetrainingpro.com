@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use App\FlexibilityWorkout;
 use App\BalanceWorkout;
+use App\StrengthWorkout;
+use App\EnduranceWorkout;
+use App\TrainingNote;
 use Image;
 use Purifier;
 
@@ -20,7 +23,8 @@ class CalendarController extends Controller
      */
     public function index()
     {
-    	return view('pages.athlete-calendar');
+    	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
+    	return view('pages.athlete-calendar')->with('bio', $bio);
     }
 
     /**
@@ -30,7 +34,8 @@ class CalendarController extends Controller
      */
     public function create()
     {
-    	return view('pages.athlete-calendar');
+    	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
+    	return view('pages.athlete-calendar')->with('bio', $bio);
     }
 
     /**
@@ -41,14 +46,46 @@ class CalendarController extends Controller
      */
     public function store(Request $request)
     {
-    	
-        // Determine what form is being submitted.
+    	// Determine what form is being submitted.
     	if ($request->has('submit_strength')) {
-    		//handle form1
-    		echo "<script>(function(){alert('strength');})();</script>";die();
+    		
+    		// validate the data
+    		$this->validate($request, array(
+    				'name' => 'required|max:191',
+    				'weight' => 'required',
+    				'reps' => 'required',
+    				'sets' => 'required',
+    				'date' => 'required'
+    		));
+    		
+    		//store in the Strenght Workout table
+    		$workout = new StrengthWorkout;
+    		$workout->user_id = Auth::user()->id;
+    		$workout->name = $request->name;
+    		$workout->weight = $request->weight;
+    		$workout->reps = $request->reps;
+    		$workout->sets = $request->sets;
+    		$workout->date = $request->date;
+    		$workout->save();
+    		
     	} else if ($request->has('submit_endurance')) {
-    		//handle form2
-    		print_r("endurance");die();
+    		// validate the data
+    		$this->validate($request, array(
+    				'name' => 'required|max:191',
+    				'distance' => 'required',
+    				'event_time' => 'required',
+    				'date' => 'required'
+    		));
+    		
+    		//store in the Endurance Workout table
+    		$workout = new EnduranceWorkout;
+    		$workout->user_id = Auth::user()->id;
+    		$workout->name = $request->name;
+    		$workout->distance = $request->distance;
+    		$workout->event_time= $request->event_time;
+    		$workout->date = $request->date;
+    		$workout->save();
+    		
     	}else if ($request->has('submit_flexibility')) {
     		$this->validate($request, array(
     				'name' => 'required|max:191',
@@ -64,6 +101,7 @@ class CalendarController extends Controller
     		$workout->sets= $request->sets;
     		$workout->date = $request->date;
     		$workout->save();
+    		
     	}else if ($request->has('submit_balance')) {
     		$this->validate($request, array(
     				'name' => 'required|max:191',
@@ -80,10 +118,24 @@ class CalendarController extends Controller
     		$workout->sets= $request->sets;
     		$workout->date = $request->date;
     		$workout->save();
-    	}else if ($request->has('submit_notes')) {
-    		//handle form2
-    		print_r("notes");die();
-    	}
+    	}else if ($request->has('submit_training_notes')) {
+
+            // validate the data
+            $this->validate($request, array(
+                    'name' => 'required|max:191',
+                    'notes' => 'required',
+                    'date' => 'required'
+            ));
+         
+            //store in the Training Notes table
+            $note = new TrainingNote;
+            $note->user_id = Auth::user()->id;
+            $note->name= $request->name;
+            $note->notes = $request->notes;
+            $note->date = $request->date;
+            $note->save();
+
+        }
     }
 
     /**

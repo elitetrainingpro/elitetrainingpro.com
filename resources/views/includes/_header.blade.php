@@ -1,58 +1,32 @@
 <div class="navbar grad">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-8">
-                <img src="{{ URL::asset('assets/images/elitetrainingpro.png') }}" alt="No image found" height="50px" width="50px">
-                <a class="icon-link" id="logo" href="/">Elite Training Pro</a>
-            </div>
-            <div class="col-sm-4 text-center">
-                <h4 class="user-name">Welcome
-                    <span id="user_name">
-                        @if( Auth::check() )
-                        {{ Auth::user()->name }}
-                        @endif
-                    </span>
-                    <a class="float-right" href="href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"">
-                        Logout <span class="glyphicon glyphicon-log-out"></span>
-                    </a>
-                </h4>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    {{ csrf_field() }}
-                </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <nav role="navigation" class="navbar navbar-default">
-                    @include('includes._headerlinks')
-                </nav>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="collapse navbar-collapse" id="app-navbar-collapse">
-    <!-- Left Side Of Navbar -->
-    <ul class="nav navbar-nav">
-        &nbsp;
-    </ul>
-    <!-- Right Side Of Navbar -->
-    <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-
-
-            <ul class="dropdown-menu" role="menu">
-                <li>
-                    <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                        Logout
-                    </a>
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
-                </li>
-            </ul>
-        </li>
-    </ul>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="col-sm-6 icon">
+					<h4 class="icon-style"><img src="{{ URL::asset('assets/images/elitetrainingpro.png') }}" alt="No image found" height="50px" width="50px">
+					<a class="icon-link" href="home">Elite Training Pro</a></h4>
+				</div>
+				<div class="col-sm-6 nav">
+					<h4 class="icon-style">@if( Auth::check() )
+						{{ Auth::user()->name }}
+						@endif
+						<div class="dropdown">
+							<img class="dropdown-toggle" type="button" data-toggle="dropdown" src="{{ URL::asset('assets/avatars/default-user.png') }}" alt="No image found" height="50px" width="50px">
+							<ul class="dropdown-menu">
+								@yield('navlinks')
+								<li>
+									<a href="href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"">
+										Logout <span class="glyphicon glyphicon-log-out"></span>
+									</a>
+									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+										{{ csrf_field() }}
+									</form>
+								</li>
+							</ul>
+						</div>
+					</h4>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
