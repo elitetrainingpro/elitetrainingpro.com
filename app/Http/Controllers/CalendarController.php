@@ -3,6 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Auth;
+use App\FlexibilityWorkout;
+use App\BalanceWorkout;
+use Image;
+use Purifier;
 
 class CalendarController extends Controller
 {
@@ -42,12 +49,37 @@ class CalendarController extends Controller
     	} else if ($request->has('submit_endurance')) {
     		//handle form2
     		print_r("endurance");die();
-    	}else if ($request->has('submit_flexability')) {
-    		//handle form2
-    		print_r("flexability");die();
+    	}else if ($request->has('submit_flexibility')) {
+    		$this->validate($request, array(
+    				'name' => 'required|max:191',
+    				'time' => 'required',
+    				'sets' => 'required',
+    				'date' => 'required'
+    		));
+    		
+    		$workout = new FlexibilityWorkout;
+    		$workout->user_id = Auth::user()->id;
+    		$workout->name = $request->name;
+    		$workout->time = $request->time;
+    		$workout->sets= $request->sets;
+    		$workout->date = $request->date;
+    		$workout->save();
     	}else if ($request->has('submit_balance')) {
-    		//handle form2
-    		print_r("balance");die();
+    		$this->validate($request, array(
+    				'name' => 'required|max:191',
+    				'time' => 'required',
+    				'sets' => 'required',
+    				'date' => 'required'
+    		));
+    		
+    		//store in the Endurance Workout table
+    		$workout = new BalanceWorkout;
+    		$workout->user_id = Auth::user()->id;
+    		$workout->name = $request->name;
+    		$workout->time = $request->time;
+    		$workout->sets= $request->sets;
+    		$workout->date = $request->date;
+    		$workout->save();
     	}else if ($request->has('submit_notes')) {
     		//handle form2
     		print_r("notes");die();

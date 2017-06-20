@@ -16,18 +16,34 @@
 	{!! Form::close() !!}
 @endsection
 
-@section('flexability')
+@section('flexibility')
 	{!! Form::open(['route' => 'athletecalendar.store', 'data-parsley-validate' => '', 'files' => true]) !!}
-		{{ Form::label('Something', 'Something') }}
-		
-	{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_flexability', 'class' => 'btn btn-success')) }}
+		{{ Form::label('name', 'Workout Name:') }}
+		{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '191']) }}
+		{{ Form::label('time', 'Time (In minutes):') }}
+		{{ Form::number('time', 'null', ['class' => 'form-control', 'required' => '']) }}
+		{{ Form::label('sets', 'Sets:') }}
+		{{ Form::number('sets', 'null', ['class' => 'form-control', 'required' => '']) }}
+		{{ Form::label('date', 'Date:') }}
+		<br>
+		{{ Form::date('date', \Carbon\Carbon::now()) }}
+		<br><br>
+		{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_flexibility', 'class' => 'btn btn-success')) }}
 	{!! Form::close() !!}
 @endsection
 
 @section('balance')
 	{!! Form::open(['route' => 'athletecalendar.store', 'data-parsley-validate' => '', 'files' => true]) !!}
-		{{ Form::label('Something', 'Something') }}
-		
+		{{ Form::label('name', 'Workout Name:') }}
+		{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '191']) }}
+		{{ Form::label('time', 'Time (In minutes):') }}
+		{{ Form::number('time', 'null', ['class' => 'form-control', 'required' => '']) }}
+		{{ Form::label('sets', 'Sets:') }}
+		{{ Form::number('sets', 'null', ['class' => 'form-control', 'required' => '']) }}
+		{{ Form::label('date', 'Date:') }}
+		<br>
+		{{ Form::date('date', \Carbon\Carbon::now()) }}
+		<br><br>
 		{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_balance', 'class' => 'btn btn-success')) }}
 	{!! Form::close() !!}
 @endsection

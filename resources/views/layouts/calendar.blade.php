@@ -46,18 +46,12 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Add Training</h4>
-					<!--Date Picker -->
-					<h5>Date</h5>
-					<div class="input-append date">
-						<input id="datetimepicker1" data-format="dd/MM/yyyy" type="text">
-						<span class="add-on"><i class="glyphicon glyphicon-calendar"></i></span>
-					</div>
 				</div>
 				<!--Training Tabs -->
 				<ul class="nav nav-tabs" id="tabContent">
 					<li class="active"><a href="#strength" data-toggle="tab">Strength</a></li>
 					<li><a href="#endurance" data-toggle="tab">Endruance</a></li>
-					<li><a href="#flexability" data-toggle="tab">Flexability</a></li>
+					<li><a href="#flexibility" data-toggle="tab">Flexibility</a></li>
 					<li><a href="#balance" data-toggle="tab">Balance</a><li>
 				</ul>
 				<div class="modal-body">
@@ -70,9 +64,9 @@
 						<div class="tab-pane" id="endurance">
 							@yield('endurance')
 						</div>
-						<!-- Flexability Tab in Modal-->
-						<div class="tab-pane" id="flexability">
-							@yield('flexability')
+						<!-- Flexibility Tab in Modal-->
+						<div class="tab-pane" id="flexibility">
+							@yield('flexibility')
 						</div>
 						<!-- Balance Tab in Modal-->
 						<div class="tab-pane" id="balance">
