@@ -20,7 +20,7 @@ class FindTrainerController extends Controller
     						$findTrainers->on('bios.user_id', '=', 'users.id')
     						->where('bios.identity', 'Coach');
     					})
-    					->get();
+    					->paginate(5);
     	return view('pages.findTrainer')->with('findTrainers', $findTrainers);
     }
 
@@ -92,8 +92,21 @@ class FindTrainerController extends Controller
     
     public function search_code(Request $request)
     {
-    	$Search = $request->search_code;
-    	$searches = DB::table('users')->where('name', 'like', '$Search')->get();
-    	return view('pages.findTrainer', compact('findTrainers'));
+    	$Search = $request->search_code; //print_r($Search);die();
+    	//$findTrainers = DB::table('users')->where('users.name', 'like', "%$Search%")->get();
+    	$findTrainers = DB::table('users')
+    	->join('bios', function ($findTrainers) use ($Search) {
+    		$findTrainers->on('users.id', '=', 'bios.user_id')
+    		->where('users.name', 'like', "%$Search%");
+    	})
+    	->paginate(5);
+//     	$findTrainers = DB::table('users')
+//     	->join('bios', function ($findTrainers) {
+//     		$findTrainers->on('users.id', '=', 'bios.user_id')
+//     		->where('users.name', 'like', '%$Search%');
+//     	})
+//     	->get();
+    	//print_r($findTrainers);die();
+    	return view('pages.findTrainer')->with('findTrainers', $findTrainers);
     }
 }
