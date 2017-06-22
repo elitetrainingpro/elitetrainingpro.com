@@ -17,8 +17,7 @@ class CreateBalanceWorkoutsTable extends Migration
             $table->increments('balance_workout_id');
             $table->integer('user_id')->unsigned();
             $table->string('name');
-            $table->decimal('time', 3, 2);
-            $table->text('notes');
+            $table->float('time');
             $table->integer('sets');
             $table->dateTimeTz('date');
             $table->timestamps();

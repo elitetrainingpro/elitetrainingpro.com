@@ -92,21 +92,13 @@ class FindTrainerController extends Controller
     
     public function search_code(Request $request)
     {
-    	$Search = $request->search_code; //print_r($Search);die();
-    	//$findTrainers = DB::table('users')->where('users.name', 'like', "%$Search%")->get();
+    	$Search = $request->search_code;
     	$findTrainers = DB::table('users')
     	->join('bios', function ($findTrainers) use ($Search) {
     		$findTrainers->on('users.id', '=', 'bios.user_id')
     		->where('users.name', 'like', "%$Search%");
     	})
     	->paginate(5);
-//     	$findTrainers = DB::table('users')
-//     	->join('bios', function ($findTrainers) {
-//     		$findTrainers->on('users.id', '=', 'bios.user_id')
-//     		->where('users.name', 'like', '%$Search%');
-//     	})
-//     	->get();
-    	//print_r($findTrainers);die();
     	return view('pages.findTrainer')->with('findTrainers', $findTrainers);
     }
 }
