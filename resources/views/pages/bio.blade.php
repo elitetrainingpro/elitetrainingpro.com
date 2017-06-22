@@ -106,7 +106,7 @@
 				<br/><br/>
 				</div>
 
-				{{ Form::submit('Submit', array('class' => 'btn btn-primary btn-lg btn-block')) }}
+				{{ Form::submit('Submit', ['class' => 'btn btn-primary btn-lg btn-block']) }}
 			{!! Form::close() !!}
 		</div>
 	</div>
