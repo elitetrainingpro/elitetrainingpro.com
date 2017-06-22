@@ -25,7 +25,7 @@
 	        <div class="navbar-header">
 	            <!-- Branding Image -->
 	            <div class="icon-style"><img src="{{ URL::asset('assets/images/elitetrainingpro.png') }}" alt="No image found" height="45px" width="45px">
-	            	<a class="navbar-brand">
+	            	<a class="navbar-brand2">
 	               		{{ config('app.name', 'Elite Training Pro') }}
 	            	</a>
 	            </div>
