@@ -1,9 +1,10 @@
-@extends('layouts.default')
+@extends('layouts.app')
 
 @section('title', '| Bio')
 
 @section('stylesheets')
-	<link media="all" type="text/css" rel="stylesheet" href="{{ URL::asset('assets/css/header.css') }}"></link>
+	<link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
+	<link href="{{ asset('assets/css/homie.css') }}" rel="stylesheet">
 @endsection
 
 @section('scripts')
@@ -16,6 +17,21 @@
         menubar: false
         });
     </script>
+@endsection
+
+@section('navbar')
+	<nav class="navbar navbar-default navbar-static-top">
+	    <div class="container">
+	        <div class="navbar-header">
+	            <!-- Branding Image -->
+	            <div class="icon-style"><img src="{{ URL::asset('assets/images/elitetrainingpro.png') }}" alt="No image found" height="45px" width="45px">
+	            	<a class="navbar-brand">
+	               		{{ config('app.name', 'Elite Training Pro') }}
+	            	</a>
+	            </div>
+	        </div>
+	    </div>
+	</nav>
 @endsection
 
 @section('content')
@@ -105,8 +121,8 @@
 				], null, ['required']) }}
 				<br/><br/>
 				</div>
-
 				{{ Form::submit('Submit', ['class' => 'btn btn-primary btn-lg btn-block']) }}
+				<br/>
 			{!! Form::close() !!}
 		</div>
 	</div>
