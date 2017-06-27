@@ -13,6 +13,10 @@
     <li><a href="schedule"><i class="fa fa-map fa"></i>Schedule</a></li>
 @endsection
 
+@section('scripts')
+    {!! Charts::assets() !!}
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -44,27 +48,111 @@
 						</div>
 						
 						<div id="Endurance" class="tabcontent">
-						  <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
 						  <h3>Endurance</h3>
-						  <p>Endurance</p>
+						  <hr>
+						  {!! Form::open(['route' => 'goals.store', 'data-parsley-validate' => '', 'files' => true]) !!}<br>
+						  	{{ Form::label('goal_type', 'Goal Type:') }}
+						  	{{ Form::select('goal_type',[
+							    'Goal Type' => [
+							    				null => 'Please Select',
+												'Weekly' => 'Weekly',
+												'Monthly' => 'Monthly',
+												'Seasonal' => 'Seasonal',
+											],
+							], null, ['required']) }}
+							{{ Form::label('name', 'Workout Name:') }}
+							{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '191']) }}
+							{{ Form::label('distance', 'Distance (miles):') }}
+					        {{ Form::number('distance', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
+							{{ Form::label('event_time', 'Time (minutes):') }}
+							{{ Form::number('event_time', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
+							{{ Form::label('date', 'Date:') }}
+							<br>
+							{{ Form::date('date', \Carbon\Carbon::now()) }}<br/><br/>
+							{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_endurance', 'class' => 'btn btn-success')) }}
+						{!! Form::close() !!}
 						</div>
 						
 						<div id="Flexibility" class="tabcontent">
-						  <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
 						  <h3>Flexibility</h3>
-						  <p>Flexibility</p> 
+						  <hr>
+						  {!! Form::open(['route' => 'goals.store', 'data-parsley-validate' => '', 'files' => true]) !!}<br>
+							{{ Form::label('goal_type', 'Goal Type:') }}
+						  	{{ Form::select('goal_type',[
+							    'Goal Type' => [
+							    				null => 'Please Select',
+												'Weekly' => 'Weekly',
+												'Monthly' => 'Monthly',
+												'Seasonal' => 'Seasonal',
+											],
+							], null, ['required']) }}
+							{{ Form::label('name', 'Workout Name:') }}
+							{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '191']) }}
+							{{ Form::label('time', 'Time (In minutes):') }}
+							{{ Form::number('time', 'null', ['class' => 'form-control', 'required' => '']) }}
+							{{ Form::label('sets', 'Sets:') }}
+							{{ Form::number('sets', 'null', ['class' => 'form-control', 'required' => '']) }}
+							{{ Form::label('date', 'Date:') }}
+							<br>
+							{{ Form::date('date', \Carbon\Carbon::now()) }}
+							<br><br>
+							{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_flexibility', 'class' => 'btn btn-success')) }}
+						{!! Form::close() !!}
 						</div>
 						
 						<div id="Strength" class="tabcontent">
-						  <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
 						  <h3>Strength</h3>
-						  <p>Strength</p>
+						  <hr>
+						  {!! Form::open(['route' => 'goals.store', 'data-parsley-validate' => '', 'files' => true]) !!}<br>
+							{{ Form::label('goal_type', 'Goal Type:') }}
+						  	{{ Form::select('goal_type',[
+							    'Goal Type' => [
+							    				null => 'Please Select',
+												'Weekly' => 'Weekly',
+												'Monthly' => 'Monthly',
+												'Seasonal' => 'Seasonal',
+											],
+							], null, ['required']) }}
+							{{ Form::label('name', 'Workout Name:') }}
+							{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '191']) }}
+							{{ Form::label('weight', 'Weight:') }}
+					        {{ Form::number('weight', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
+							{{ Form::label('reps', 'Reps:') }}
+							{{ Form::number('reps', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
+							{{ Form::label('sets', 'Sets:') }}
+							{{ Form::number('sets', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
+							{{ Form::label('date', 'Date:') }}
+							<br>
+							{{ Form::date('date', \Carbon\Carbon::now()) }}<br/><br/>
+							{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_strength', 'class' => 'btn btn-success')) }}
+						{!! Form::close() !!}
 						</div>
 						
 						<div id="Balance" class="tabcontent">
-						  <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
 						  <h3>Balance</h3>
-						  <p>Balance</p>
+						  <hr>
+						  {!! Form::open(['route' => 'goals.store', 'data-parsley-validate' => '', 'files' => true]) !!}<br>
+							{{ Form::label('goal_type', 'Goal Type:') }}
+						  	{{ Form::select('goal_type',[
+							    'Goal Type' => [
+							    				null => 'Please Select',
+												'weekly' => 'Weekly',
+												'monthly' => 'Monthly',
+												'seasonal' => 'Seasonal',
+											],
+							], null, ['required']) }}
+							{{ Form::label('name', 'Workout Name:') }}
+							{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '191']) }}
+							{{ Form::label('time', 'Time (In minutes):') }}
+							{{ Form::number('time', 'null', ['class' => 'form-control', 'required' => '']) }}
+							{{ Form::label('sets', 'Sets:') }}
+							{{ Form::number('sets', 'null', ['class' => 'form-control', 'required' => '']) }}
+							{{ Form::label('date', 'Date:') }}
+							<br>
+							{{ Form::date('date', \Carbon\Carbon::now()) }}
+							<br><br>
+							{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_balance', 'class' => 'btn btn-success')) }}
+						{!! Form::close() !!}
 						</div>
 						
 						<script>
@@ -86,12 +174,14 @@
 							document.getElementById("defaultOpen").click();
 						</script>
 					</div>
+
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
 				</div> 
 			</div>
 		</div>
+		{!! $chart->render() !!}
     </div>
 </div>
 @endsection
