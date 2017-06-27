@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use App\AthleteToCoach;
 
 class FindTrainerController extends Controller
 {
@@ -42,7 +45,21 @@ class FindTrainerController extends Controller
      */
     public function store(Request $request)
     {
-    	return view('pages.findTrainer');
+    	// validate the data
+    	$this->validate($request, array(
+    			'email' => 'required',
+    	));
+    	
+    	$coachId = DB::table('users')->where('email', $request->email)->first();
+
+    	$workout = new AthleteToCoach;
+    	$workout->athlete_id = Auth::user()->id;
+    	$workout->coach_id = $coachId->id;
+    	$workout->still_connected = 1;
+    	$workout->save();
+
+    	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
+    	return view('pages.home')->with('bio', $bio);
     }
 
     /**
