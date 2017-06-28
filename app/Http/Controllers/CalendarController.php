@@ -68,6 +68,34 @@ class CalendarController extends Controller
     		$workout->date = $request->date;
     		$workout->save();
     		
+    		$newVol = $workout->weight * $workout->reps * $workout->sets;
+    		$volGoal= 0;
+    		$goals = DB::table('strength_goals')->where('user_id', Auth::user()->id)->get();
+    		//print_r($goals);die();
+    		foreach ($goals as $goal) {
+    			// only do if names match each other
+    			if ($goal->name == $workout->name) {
+    				if ($goal->percent < 1.00) {
+		    			$volGoal = $goal->weight * $goal->reps * $goal->sets;
+		    			//print_r($newVol); print_r(" ");print_r($volGoal); print_r(" ");
+		    			$average = $newVol / $volGoal;
+		    			
+		    			// where user_id => Auth::user-id and where created_at => date & time
+		    			$data = array(
+		    					'user_id' => Auth::user()->id,
+		    					'created_at' => $goal->created_at
+		    			);
+		    			
+		    			DB::table('strength_goals')
+		    			->where($data)
+		    			->update(['percent' => $average]);
+    				}
+    			}
+    			//print_r($average);die();
+    			//     		${'weight' . $number} = $workout->weight;
+    			//     		${'reps' . $number} = $workout->reps;
+    			//     		${'sets' . $number} = $workout->sets;
+    		}
     	} else if ($request->has('submit_endurance')) {
     		// validate the data
     		$this->validate($request, array(
@@ -85,6 +113,8 @@ class CalendarController extends Controller
     		$workout->event_time= $request->event_time;
     		$workout->date = $request->date;
     		$workout->save();
+    		
+    		
     		
     	}else if ($request->has('submit_flexibility')) {
     		$this->validate($request, array(

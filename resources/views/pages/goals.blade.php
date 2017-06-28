@@ -181,7 +181,14 @@
 				</div> 
 			</div>
 		</div>
-		{!! $chart->render() !!}
     </div>
+    <div class="row">
+    @foreach($charts as $chart)
+    	<div class="col-md-4">
+    		{!! $chart->render() !!}
+    	</div>
+	@endforeach
+    </div>
+    
 </div>
 @endsection

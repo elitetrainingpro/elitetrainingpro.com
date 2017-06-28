@@ -21,6 +21,7 @@ class CreateEnderanceGoalsTable extends Migration
     		$table->float('distance');
     		$table->float('event_time');
     		$table->dateTimeTz('date');
+    		$table->float('percent');
     		$table->timestamps();
     		$table->foreign('user_id')->references('id')->on('users');
     	});
