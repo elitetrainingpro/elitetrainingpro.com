@@ -2,30 +2,32 @@
 
 @section('strength')
 	{!! Form::open(['route' => 'athletecalendar.store', 'data-parsley-validate' => '', 'files' => true]) !!}
-		{{ Form::label('name', 'Workout Name') }}
+		{{ Form::label('name', 'Workout Name:') }}
 		{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '191']) }}
-		{{ Form::label('weight', 'Weight') }}
+		{{ Form::label('weight', 'Weight:') }}
         {{ Form::number('weight', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
-		{{ Form::label('reps', 'Reps') }}
+		{{ Form::label('reps', 'Reps:') }}
 		{{ Form::number('reps', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
-		{{ Form::label('sets', 'Sets') }}
+		{{ Form::label('sets', 'Sets:') }}
 		{{ Form::number('sets', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
-		{{ Form::label('date', 'Date') }}
-		{{ Form::date('date', \Carbon\Carbon::now()) }}<br/>
+		{{ Form::label('date', 'Date:') }}
+		<br/>
+		{{ Form::date('date', \Carbon\Carbon::now()) }}<br/><br/>
 		{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_strength', 'class' => 'btn btn-success')) }}
 	{!! Form::close() !!}
 @endsection
 
 @section('endurance')
 	{!! Form::open(['route' => 'athletecalendar.store', 'data-parsley-validate' => '', 'files' => true]) !!}
-		{{ Form::label('name', 'Workout Name') }}
+		{{ Form::label('name', 'Workout Name:') }}
 		{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '191']) }}
-		{{ Form::label('distance', 'Distance (miles)') }}
+		{{ Form::label('distance', 'Distance (miles):') }}
         {{ Form::number('distance', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
-		{{ Form::label('event_time', 'Time (minutes)') }}
+		{{ Form::label('event_time', 'Time (minutes):') }}
 		{{ Form::number('event_time', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
-		{{ Form::label('date', 'Date') }}
-		{{ Form::date('date', \Carbon\Carbon::now()) }}<br/>
+		{{ Form::label('date', 'Date:') }}
+		<br/>
+		{{ Form::date('date', \Carbon\Carbon::now()) }}<br/><br/>
 		{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_endurance', 'class' => 'btn btn-success')) }}
 	{!! Form::close() !!}
 @endsection
@@ -64,46 +66,14 @@
 
 @section('trainingNotes')
 	{!! Form::open(['route' => 'athletecalendar.store', 'data-parsley-validate' => '', 'files' => true]) !!}
-		{{ Form::label('name', 'Type of Note (ex. Training, Nutritional, Medical)') }}
+		{{ Form::label('name', 'Title:') }}
 		{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '191']) }}
-		{{ Form::label('notes', 'Enter Your Training Notes') }}
+		{{ Form::label('notes', 'Enter Your Training Notes:') }}
 		{{ Form::textarea('notes', null, ['class' => 'form-control']) }}<br/>
-		{{ Form::label('date', 'Date') }}
+		{{ Form::label('date', 'Date:') }}
+		<br/>
 		{{ Form::date('date', \Carbon\Carbon::now()) }}<br/><br/>
 		
 		{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_training_notes', 'class' => 'btn btn-success')) }}
-	{!! Form::close() !!}
-@endsection
-
-
-@section('nutritionNotes')
-	{!! Form::open(['route' => 'athletecalendar.store', 'data-parsley-validate' => '', 'files' => true]) !!}
-		
-		{{ Form::label('notes', 'Enter Your Nutrition Notes') }}
-		{{ Form::textarea('notes', null, ['class' => 'form-control']) }}<br>
-		{{ Form::label('date', 'Date') }}
-		{{ Form::date('date', \Carbon\Carbon::now()) }}<br/></br>
-		
-		{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_nutrition_notes', 'class' => 'btn btn-success')) }}
-	{!! Form::close() !!}
-@endsection
-
-
-@section('medicalNotes')
-	{!! Form::open(['route' => 'athletecalendar.store', 'data-parsley-validate' => '', 'files' => true]) !!}
-		{{ Form::label('notes', 'Enter Your Medical Notes') }}
-		{{ Form::textarea('notes', null, ['class' => 'form-control']) }}<br/>	
-		{{ Form::label('date', 'Date') }}
-		{{ Form::date('date', \Carbon\Carbon::now()) }}<br/><br/>
-
-		{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_medical_notes', 'class' => 'btn btn-success')) }}
-	{!! Form::close() !!}
-@endsection
-
-@section('notes')
-	{!! Form::open(['route' => 'athletecalendar.store', 'data-parsley-validate' => '', 'files' => true]) !!}
-		
-		
-		{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_notes', 'class' => 'btn btn-success')) }}
 	{!! Form::close() !!}
 @endsection

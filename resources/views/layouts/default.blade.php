@@ -4,6 +4,7 @@
     @include('includes._head')
     @yield('stylesheets')
     @yield('scripts')
+
 </head>
 <body>
     @include('includes._header')
