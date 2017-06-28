@@ -22,6 +22,7 @@ class CreateStrengthGoalsTable extends Migration
     		$table->integer('reps');
     		$table->integer('sets');
     		$table->dateTimeTz('date');
+    		$table->float('percent');
     		$table->timestamps();
     		$table->foreign('user_id')->references('id')->on('users');
     	});

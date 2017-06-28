@@ -23,10 +23,39 @@ class GoalController extends Controller
     public function index()
     {
     	// Set the Strength
-    	$workouts = DB::table('strength_workouts')->where('user_id', Auth::user()->id)->get();
-    	$goals = DB::table('strength_goals')->where([['user_id', Auth::user()->id],['goal_type', 'Weekly']])->get();
+    	//$workouts = DB::table('strength_workouts')->where('user_id', Auth::user()->id)->get();
+     	$goals = DB::table('strength_goals')->where('user_id', Auth::user()->id)->get();
+ 		
+  		//print_r($goals);die();
+ 		//print_r(sizeof($goals));die();
+ 		$charts = array();
+ 		foreach ($goals as $goal) {
+ 				$average = $goal->percent * 100;
+ 			  	$chart = Charts::create('percentage', 'justgage')
+ 				   	->title($goal->name)
+ 			    	->elementLabel('Percentage')
+ 			     	->values([$average,0,100])
+ 			     	->responsive(false)
+ 			     	->height(300)
+ 			     	->width(0);
+ 			  	array_push($charts, $chart);
+ 		}
+ 		//print_r($charts);die();
+ 		//${'name' . $number} = $workout->name;
+ 		//     		${'weight' . $number} = $workout->weight;
+ 		//     		${'reps' . $number} = $workout->reps;
+ 		//     		${'sets' . $number} = $workout->sets;
+ 		//pass the size of the array to view
+ 		// loop through the array of charts using the size of the array
+ 		
+ 		
+ 		// loop through all the goals
+ 			// get the percentage
+ 			// create the chart for that percentage
+ 			// passing that chart to the view
+ 			
     	//$goals = DB::table('strength_goals')->where('user_id', Auth::user()->id)->get();
-    	print_r($goals);die();
+ //   	print_r($goals);die();
 //     	$number = $num = 0;
 //     	foreach ($workouts as $workout) {
     		
@@ -54,34 +83,22 @@ class GoalController extends Controller
     		
     		
 //     	}
-//     	die();
-//     	$name = $workouts->name;
-//     	$weight = $workouts->weight;
-//     	$reps = $workouts->reps;
-//     	$sets = $workouts->sets;
-    	
-//     	$nameGoal = $goals->name;
-//     	$weightGoal= $goals->weight;
-//     	$repsGoal= $goals->reps;
-//     	$setsGoal= $goals->sets;
-    	
-//     	$volume = $weight * $reps * $sets;
-//     	$volumeGoal = $weightGoal* $repsGoal* $setsGoal;
-//     	$average = ($volume/$volumeGoal) * 100;
+
     	
     	// Set the Endurance
     	
     	// Set the Flexibility
     	
     	// Set the Balance
-    	$chart = Charts::create('percentage', 'justgage')
-    	->title("Goal")
-    	->elementLabel('Percentage')
-    	->values([76,0,100])
-    	->responsive(false)
-    	->height(300)
-    	->width(0);
-    	return view('pages.goals', ['chart' => $chart]);
+//     	$chart = Charts::create('percentage', 'justgage')
+//     	->title("Goal")
+//     	->elementLabel('Percentage')
+//     	->values([76,0,100])
+//     	->responsive(false)
+//     	->height(300)
+//     	->width(0);
+     	return view('pages.goals', ['charts' => $charts]);
+//     	return view('pages.goals')->wi;
     }
 
     /**
@@ -123,6 +140,7 @@ class GoalController extends Controller
     		$workout->reps = $request->reps;
     		$workout->sets = $request->sets;
     		$workout->date = $request->date;
+    		$workout->percent = 0;
     		$workout->save();
     		
     	} else if ($request->has('submit_endurance')) {
@@ -143,6 +161,7 @@ class GoalController extends Controller
     		$workout->distance = $request->distance;
     		$workout->event_time= $request->event_time;
     		$workout->date = $request->date;
+    		$workout->percent = 0;
     		$workout->save();
     		
     	}else if ($request->has('submit_flexibility')) {
@@ -161,6 +180,7 @@ class GoalController extends Controller
     		$workout->time = $request->time;
     		$workout->sets= $request->sets;
     		$workout->date = $request->date;
+    		$workout->percent = 0;
     		$workout->save();
     		
     	}else if ($request->has('submit_balance')) {
@@ -180,6 +200,7 @@ class GoalController extends Controller
     		$workout->time = $request->time;
     		$workout->sets= $request->sets;
     		$workout->date = $request->date;
+    		$workout->percent = 0;
     		$workout->save();
     	}
     }
