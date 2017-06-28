@@ -50,16 +50,20 @@ class FindTrainerController extends Controller
     			'email' => 'required',
     	));
     	
-    	$coachId = DB::table('users')->where('email', $request->email)->first();
-
-    	$workout = new AthleteToCoach;
-    	$workout->athlete_id = Auth::user()->id;
-    	$workout->coach_id = $coachId->id;
-    	$workout->still_connected = 1;
-    	$workout->save();
-
     	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
-    	return view('pages.home')->with('bio', $bio);
+    	$coachId = DB::table('users')->where('email', $request->email)->first();
+    	$athlete2Coach = DB::table('athlete_to_coaches')->where([['athlete_id', $bio->user_id], ['coach_id', $coachId->id]])->first();
+    	
+    	if (!$athlete2Coach)
+    	{
+    		$workout = new AthleteToCoach;
+    		$workout->athlete_id = Auth::user()->id;
+    		$workout->coach_id = $coachId->id;
+    		$workout->still_connected = 1;
+    		$workout->save();
+    	}
+
+    	return view('pages.athletes-home')->with('bio', $bio);
     }
 
     /**
@@ -69,8 +73,8 @@ class FindTrainerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-    	return view('pages.findTrainer');
+    {    	
+    
     }
 
     /**
@@ -108,7 +112,7 @@ class FindTrainerController extends Controller
     }
     
     public function search_code(Request $request)
-    {
+    {    	
     	$Search = $request->search_code;
     	$findTrainers = DB::table('users')
     	->join('bios', function ($findTrainers) use ($Search) {
