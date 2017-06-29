@@ -50,10 +50,16 @@ class FindTrainerController extends Controller
     			'email' => 'required',
     	));
     	
+    	// Get current sure login info.
     	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
+    	
+    	// get the coach's information that the trainer clicked on
     	$coachId = DB::table('users')->where('email', $request->email)->first();
+    	
+    	// check athlete to coaches table to see if athlete and coach are already matched together
     	$athlete2Coach = DB::table('athlete_to_coaches')->where([['athlete_id', $bio->user_id], ['coach_id', $coachId->id]])->first();
     	
+    	// if coach and athlete are not matched together then match them together
     	if (!$athlete2Coach)
     	{
     		$workout = new AthleteToCoach;
@@ -63,6 +69,7 @@ class FindTrainerController extends Controller
     		$workout->save();
     	}
 
+    	// return to the athlete's home page
     	return view('pages.athletes-home')->with('bio', $bio);
     }
 
