@@ -22,83 +22,65 @@ class GoalController extends Controller
      */
     public function index()
     {
-    	// Set the Strength
-    	//$workouts = DB::table('strength_workouts')->where('user_id', Auth::user()->id)->get();
+    	// Create Strength Goal Charts
      	$goals = DB::table('strength_goals')->where('user_id', Auth::user()->id)->get();
  		
-  		//print_r($goals);die();
- 		//print_r(sizeof($goals));die();
  		$charts = array();
  		foreach ($goals as $goal) {
  				$average = $goal->percent * 100;
  			  	$chart = Charts::create('percentage', 'justgage')
  				   	->title($goal->name)
- 			    	->elementLabel('Percentage')
+ 			    	->elementLabel('Strength Goal')
  			     	->values([$average,0,100])
  			     	->responsive(false)
  			     	->height(300)
  			     	->width(0);
  			  	array_push($charts, $chart);
  		}
- 		//print_r($charts);die();
- 		//${'name' . $number} = $workout->name;
- 		//     		${'weight' . $number} = $workout->weight;
- 		//     		${'reps' . $number} = $workout->reps;
- 		//     		${'sets' . $number} = $workout->sets;
- 		//pass the size of the array to view
- 		// loop through the array of charts using the size of the array
  		
+ 		// Create Endurance Goal Charts
+ 		$goals = DB::table('endurance_goals')->where('user_id', Auth::user()->id)->get();
+ 		foreach ($goals as $goal) {
+ 			$average = $goal->percent * 100;
+ 			$chart = Charts::create('percentage', 'justgage')
+ 			->title($goal->name)
+ 			->elementLabel('Endurance Goal')
+ 			->values([$average,0,100])
+ 			->responsive(false)
+ 			->height(300)
+ 			->width(0);
+ 			array_push($charts, $chart);
+ 		}
  		
- 		// loop through all the goals
- 			// get the percentage
- 			// create the chart for that percentage
- 			// passing that chart to the view
- 			
-    	//$goals = DB::table('strength_goals')->where('user_id', Auth::user()->id)->get();
- //   	print_r($goals);die();
-//     	$number = $num = 0;
-//     	foreach ($workouts as $workout) {
-    		
-//     		${'name' . $number} = $workout->name;
-//     		${'weight' . $number} = $workout->weight;
-//     		${'reps' . $number} = $workout->reps;
-//     		${'sets' . $number} = $workout->sets;
-//     		${'volume'. $number} = ${'weight' . $number} * ${'reps' . $number} * ${'sets' . $number};
-//     		print_r(" Workokut:");print_r(${'name' . $number}); print_r(" ");
-//     		$number++;
-    		
-//     		foreach ($goals as $goal) {
-    			
-//     			${'nameGoal' . $num} = $goal->name;
-//     			${'weightGoal' . $num} = $goal->weight;
-//     			${'repsGoal' . $num} = $goal->reps;
-//     			${'setsGoal' . $num} = $goal->sets;
-//     			${'volumeGoal'. $num} = ${'weightGoal' . $num} * ${'repsGoal' . $num} * ${'setsGoal' . $num};
-//     			print_r(" Goal:");print_r(${'nameGoal' . $num});print_r(" ");
-//     			$num++;
-    			
-    			
-    			
-//     		}
-    		
-    		
-//     	}
+ 		// Create Balance Goal Charts
+ 		$goals = DB::table('balance_goals')->where('user_id', Auth::user()->id)->get();
+ 		foreach ($goals as $goal) {
+ 			$average = $goal->percent * 100;
+ 			$chart = Charts::create('percentage', 'justgage')
+ 			->title($goal->name)
+ 			->elementLabel('Balance Goal')
+ 			->values([$average,0,100])
+ 			->responsive(false)
+ 			->height(300)
+ 			->width(0);
+ 			array_push($charts, $chart);
+ 		}
+ 		
+ 		// Create Flexibility Goal Charts
+ 		$goals = DB::table('flexibility_goals')->where('user_id', Auth::user()->id)->get();
+ 		foreach ($goals as $goal) {
+ 			$average = $goal->percent * 100;
+ 			$chart = Charts::create('percentage', 'justgage')
+ 			->title($goal->name)
+ 			->elementLabel('Flexibility Goal')
+ 			->values([$average,0,100])
+ 			->responsive(false)
+ 			->height(300)
+ 			->width(0);
+ 			array_push($charts, $chart);
+ 		}
 
-    	
-    	// Set the Endurance
-    	
-    	// Set the Flexibility
-    	
-    	// Set the Balance
-//     	$chart = Charts::create('percentage', 'justgage')
-//     	->title("Goal")
-//     	->elementLabel('Percentage')
-//     	->values([76,0,100])
-//     	->responsive(false)
-//     	->height(300)
-//     	->width(0);
      	return view('pages.goals', ['charts' => $charts]);
-//     	return view('pages.goals')->wi;
     }
 
     /**

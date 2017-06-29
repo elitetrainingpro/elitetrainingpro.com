@@ -68,33 +68,30 @@ class CalendarController extends Controller
     		$workout->date = $request->date;
     		$workout->save();
     		
+    		// Calculate the percentage of the percentage
     		$newVol = $workout->weight * $workout->reps * $workout->sets;
     		$volGoal= 0;
     		$goals = DB::table('strength_goals')->where('user_id', Auth::user()->id)->get();
-    		//print_r($goals);die();
+    		
+    		// check to see if current goal percent database is < than the new percent
     		foreach ($goals as $goal) {
     			// only do if names match each other
     			if ($goal->name == $workout->name) {
     				if ($goal->percent < 1.00) {
 		    			$volGoal = $goal->weight * $goal->reps * $goal->sets;
-		    			//print_r($newVol); print_r(" ");print_r($volGoal); print_r(" ");
 		    			$average = $newVol / $volGoal;
-		    			
-		    			// where user_id => Auth::user-id and where created_at => date & time
-		    			$data = array(
-		    					'user_id' => Auth::user()->id,
-		    					'created_at' => $goal->created_at
-		    			);
-		    			
-		    			DB::table('strength_goals')
-		    			->where($data)
-		    			->update(['percent' => $average]);
+		    			if ($goal->percent < $average) {
+		    				$data = array(
+		    						'user_id' => Auth::user()->id,
+		    						'created_at' => $goal->created_at
+		    				);
+		    				// store the percentage in the database
+		    				DB::table('strength_goals')
+		    				->where($data)
+		    				->update(['percent' => $average]);
+		    			}
     				}
     			}
-    			//print_r($average);die();
-    			//     		${'weight' . $number} = $workout->weight;
-    			//     		${'reps' . $number} = $workout->reps;
-    			//     		${'sets' . $number} = $workout->sets;
     		}
     	} else if ($request->has('submit_endurance')) {
     		// validate the data
@@ -114,7 +111,29 @@ class CalendarController extends Controller
     		$workout->date = $request->date;
     		$workout->save();
     		
-    		
+    		// Calculate the percentage of the percentage
+    		$mph = $workout->distance/($workout->event_time/60);
+    		$volGoal= 0;
+    		$goals = DB::table('endurance_goals')->where('user_id', Auth::user()->id)->get();
+    		foreach ($goals as $goal) {
+    			// only do if names match each other
+    			if ($goal->name == $workout->name) {
+    				if ($goal->percent < 1.00) {
+    					$mphGoal = $goal->distance/($goal->event_time/60);
+    					$average = $mph/ $mphGoal;
+    					if ($goal->percent < $average) {
+    						$data = array(
+    								'user_id' => Auth::user()->id,
+    								'created_at' => $goal->created_at
+    						);
+    						// store the percentage in the database
+    						DB::table('endurance_goals')
+    						->where($data)
+    						->update(['percent' => $average]);
+    					}
+    				}
+    			}
+    		}
     		
     	}else if ($request->has('submit_flexibility')) {
     		$this->validate($request, array(
@@ -132,6 +151,30 @@ class CalendarController extends Controller
     		$workout->date = $request->date;
     		$workout->save();
     		
+    		// Calculate the percentage of the percentage
+    		$newVol= $workout->sets/($workout->time/60);
+    		$volGoal= 0;
+    		$goals = DB::table('flexibility_goals')->where('user_id', Auth::user()->id)->get();
+    		foreach ($goals as $goal) {
+    			// only do if names match each other
+    			if ($goal->name == $workout->name) {
+    				if ($goal->percent < 1.00) {
+    					$volGoal = $goal->sets/($goal->time/60);
+    					$average = $newVol / $volGoal;
+    					if ($goal->percent < $average) {
+    						$data = array(
+    								'user_id' => Auth::user()->id,
+    								'created_at' => $goal->created_at
+    						);
+    						// store the percentage in the database
+    						DB::table('flexibility_goals')
+    						->where($data)
+    						->update(['percent' => $average]);
+    					}
+    				}
+    			}
+    		}
+    		
     	}else if ($request->has('submit_balance')) {
     		$this->validate($request, array(
     				'name' => 'required|max:191',
@@ -148,6 +191,31 @@ class CalendarController extends Controller
     		$workout->sets= $request->sets;
     		$workout->date = $request->date;
     		$workout->save();
+    		
+    		// Calculate the percentage of the percentage
+    		$newVol = $workout->sets/($workout->time/60);
+    		$volGoal= 0;
+    		$goals = DB::table('balance_goals')->where('user_id', Auth::user()->id)->get();
+    		foreach ($goals as $goal) {
+    			// only do if names match each other
+    			if ($goal->name == $workout->name) {
+    				if ($goal->percent < 1.00) {
+    					$volGoal = $goal->sets/($goal->time/60);
+    					$average = $newVol / $volGoal;
+    					if ($goal->percent < $average) {
+    						$data = array(
+    								'user_id' => Auth::user()->id,
+    								'created_at' => $goal->created_at
+    						);
+    						// store the percentage in the database
+    						DB::table('balance_goals')
+    						->where($data)
+    						->update(['percent' => $average]);
+    					}
+    				}
+    			}
+    		}
+    		
     	}else if ($request->has('submit_training_notes')) {
 
             // validate the data
