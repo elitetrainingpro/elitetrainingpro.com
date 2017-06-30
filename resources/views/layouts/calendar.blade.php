@@ -4,10 +4,18 @@
 
 @section('stylesheets')
 	<link media="all" type="text/css" rel="stylesheet" href="{{ URL::asset('assets/css/header.css') }}"></link>
+	<link rel='stylesheet' href="{{ URL::asset('assets/fullcalendar/fullcalendar.css') }}" /> 
+	<style>
+	.nav {
+		margin-right: 0px;
+	}
+	</style>
 @endsection
 
 @section('scripts')
-	<script src="{{ URL::asset('assets/js/calendar.js') }}"></script>
+	<script src="{{ URL::asset('assets/fullcalendar/lib/jquery.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/fullcalendar/lib/moment.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/fullcalendar/fullcalendar.js') }}"></script>
 @endsection
 
 @section('navlinks')
@@ -38,7 +46,7 @@
 	</div>
 
 	<!-- Training Modal -->
-	<div class="modal fade" id="addTraining" role="dialog">
+	<div class="modal fade" id="addTraining" role="dialog" tabindex="-1">
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
@@ -121,38 +129,49 @@
 	</div>
 </div>
 
-<!-- Calendar Modal -->
-<div id="cal">
-	<div class="header">
-		<span class="left button" id="prev"> &lang; </span>
-		<span class="month-year" id="label">May 2017</span>
-		<span class="right button" id="next"> &rang;</span>
-	</div>
-	<table id="days">
-		<tr>
-			<td>Sun</td>
-			<td>Mon</td>
-			<td>Tue</td>
-			<td>Wed</td>
-			<td>Thr</td>
-			<td>Fri</td>
-			<td>Sat</td>
-		</tr>
-	</table>
-	<div id="cal-frame">
-		<table class="curr">
-			<tr><td class="nil"></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
-			<tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td class="today">12</td><td>13</td></tr>
-			<tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
-			<tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr>
-			<tr><td>28</td><td>29</td><td>30</td><td>31</td><td class="nil"></td><td class="nil"></td><td class="nil"></td></tr>
-		</table>
-	</div>
-</div>
+<div id="calendar"></div>
 <script>
-	$(document).ready(function(){
-		var cal = CALENDAR();
-		cal.init();
-	});
+$(document).ready(function() {
+    var BASEURL = "{{ url('/') }}";
+    $('#calendar').fullCalendar({
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,basicWeek,basicDay'
+        },
+        navLinks: true,
+        editable: false,
+        selectable: true,
+        selectHelper: true,
+        select: function(date){
+           date = moment(date.format());
+           $('#date').val(date.format('YYYY-MM-DD'));
+           jQuery.noConflict();
+           $('#addTraining').modal('toggle');
+        },
+        events: BASEURL + '/events',
+        eventSources: [
+		{
+		    events: [ // put the array in the `events` property
+		        {
+		            title  : 'event1',
+		            start  : '2017-06-01'
+		        },
+		        {
+		            title  : 'event2',
+		            start  : '2017-06-05',
+		            end    : '2017-06-07'
+		        },
+		        {
+		            title  : 'event3',
+		            start  : '2017-06-09T12:30:00',
+		        }
+		    ],
+		    color: 'black',     // an option!
+		    textColor: 'yellow' // an option!
+		}
+		]
+		    });
+		});
 </script>
 @endsection
