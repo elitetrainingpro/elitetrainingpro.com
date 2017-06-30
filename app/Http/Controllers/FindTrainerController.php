@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use App\AthleteToCoach;
 
 class FindTrainerController extends Controller
 {
@@ -42,7 +45,32 @@ class FindTrainerController extends Controller
      */
     public function store(Request $request)
     {
-    	return view('pages.findTrainer');
+    	// validate the data
+    	$this->validate($request, array(
+    			'email' => 'required',
+    	));
+    	
+    	// Get current sure login info.
+    	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
+    	
+    	// get the coach's information that the trainer clicked on
+    	$coachId = DB::table('users')->where('email', $request->email)->first();
+    	
+    	// check athlete to coaches table to see if athlete and coach are already matched together
+    	$athlete2Coach = DB::table('athlete_to_coaches')->where([['athlete_id', $bio->user_id], ['coach_id', $coachId->id]])->first();
+    	
+    	// if coach and athlete are not matched together then match them together
+    	if (!$athlete2Coach)
+    	{
+    		$workout = new AthleteToCoach;
+    		$workout->athlete_id = Auth::user()->id;
+    		$workout->coach_id = $coachId->id;
+    		$workout->still_connected = 1;
+    		$workout->save();
+    	}
+
+    	// return to the athlete's home page
+    	return view('pages.athletes-home')->with('bio', $bio);
     }
 
     /**
@@ -52,8 +80,8 @@ class FindTrainerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-    	return view('pages.findTrainer');
+    {    	
+    
     }
 
     /**
@@ -91,7 +119,7 @@ class FindTrainerController extends Controller
     }
     
     public function search_code(Request $request)
-    {
+    {    	
     	$Search = $request->search_code;
     	$findTrainers = DB::table('users')
     	->join('bios', function ($findTrainers) use ($Search) {

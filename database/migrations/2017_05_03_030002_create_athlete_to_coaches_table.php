@@ -18,6 +18,7 @@ class CreateAthleteToCoachesTable extends Migration
             $table->integer('athlete_id')->unsigned();
             $table->integer('coach_id')->unsigned();
             $table->boolean('still_connected');
+            $table->timestamps();
             $table->foreign('athlete_id')->references('id')->on('users');
             $table->foreign('coach_id')->references('id')->on('users');
         });

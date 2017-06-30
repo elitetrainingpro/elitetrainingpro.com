@@ -1,0 +1,74 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+#ProfilePage
+{
+    margin: 50px auto;
+    width: 635px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#LeftCol
+{
+    float: left;
+
+    width: 200px;
+    text-align: center;
+
+    margin-right: 20px;
+
+}
+
+#Info
+{
+    width: 400px;
+    text-align: center;
+    margin-top:20px;
+    float: right;
+}
+
+#Info strong
+{
+    display: inline-block;
+    text-align: left;
+    width: 100px;
+
+}
+
+#Info span
+{
+    text-align:left;
+    display: inline-block;
+    width: 250px;
+}
+
+/* For The secondary people*/
+#Profile
+{
+    margin: 40px auto;
+    width: 425px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#Lefts
+{
+    float: left;
+    width: 100px;
+    text-align: center;
+    margin: 5px;
+
+}
+
+#Infos
+{
+    width: 280px;
+    margin:10px;
+    float: right;
+    text-align:left;
+    display: inline-block;
+}
+#Infos span
+{
+    /* Give it a width */
+    display: inline-block;
+    width: 280px;
+}

@@ -42,11 +42,11 @@ class BioController extends Controller
     {
         // validate the data
         $this->validate($request, array(
-        	'city' => 'required|max:191',
-        	'state' => 'required',
-        	'bio' => 'required|max:191',
-        	'identity' => 'required',
-        	'image' => 'sometimes|image'
+            'city' => 'required|max:191',
+            'state' => 'required',
+            'bio' => 'required|max:191',
+            'identity' => 'required',
+            'image' => 'sometimes|image|max:2000'
         ));
         
         // store in the database
@@ -59,27 +59,27 @@ class BioController extends Controller
         $bio->identity = $request->identity;
 
         if ($request->hasFile('image')) {
-        	$image = $request->file('image');
-        	$filename = time() . '.' . $image->getClientOriginalExtension();
-        	$location = public_path('assets/avatars/uploads/' . $filename);
-        	Image::make($image)->resize(800, 400)->save($location);
-        	
-        	$bio->image = $filename;
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('assets/avatars/uploads/' . $filename);
+            Image::make($image)->resize(800, 400)->save($location);
+            
+            $bio->image = $filename;
         }
         else {
-        	return view('pages.bio');
+            return view('pages.bio');
         }
         
         $bio->save();
         
         if ($bio->identity != NULL) {
-        	if ($bio->identity == 'Coach'){
-        		return view('pages.home')->with('bio', $bio);
-        	} else {
-        		return view('pages.athletes-home')->with('bio', $bio);
-        	}
+            if ($bio->identity == 'Coach'){
+                return view('pages.home')->with('bio', $bio);
+            } else {
+                return view('pages.athletes-home')->with('bio', $bio);
+            }
         }else { // If identity is null then go to bio page (This should never ever happen)
-        	return view('pages.bio');
+            return view('pages.bio');
         }
         return redirect()->route('bios.show', $bio->id);
         // redirect to another page
@@ -94,18 +94,18 @@ class BioController extends Controller
      */
     public function show($id)
     {
-    	// May not need this code but lets keep it for now.
-//     	$bio = Bio::find($id);
-    	
-//     	if ($bio->identity != NULL) {
-// 	    	if ($bio->identity == 'Coach'){
-// 	    		return view('pages.home')->with('bio', $bio);
-// 	    	} else {
-// 	    		return view('pages.athletes-home')->with('bio', $bio);
-// 	    	}
-// 	    }else { // If identity is null then go to bio page (This should never ever happen)
-// 	    	return view('pages.bio');
-// 	    }
+        // May not need this code but lets keep it for now.
+//      $bio = Bio::find($id);
+        
+//      if ($bio->identity != NULL) {
+//          if ($bio->identity == 'Coach'){
+//              return view('pages.home')->with('bio', $bio);
+//          } else {
+//              return view('pages.athletes-home')->with('bio', $bio);
+//          }
+//      }else { // If identity is null then go to bio page (This should never ever happen)
+//          return view('pages.bio');
+//      }
     }
 
     /**
