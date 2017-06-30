@@ -40,3 +40,35 @@
     display: inline-block;
     width: 250px;
 }
+
+/* For The secondary people*/
+#Profile
+{
+    margin: 40px auto;
+    width: 425px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#Lefts
+{
+    float: left;
+    width: 100px;
+    text-align: center;
+    margin: 5px;
+
+}
+
+#Infos
+{
+    width: 280px;
+    margin:10px;
+    float: right;
+    text-align:left;
+    display: inline-block;
+}
+#Infos span
+{
+    /* Give it a width */
+    display: inline-block;
+    width: 280px;
+}

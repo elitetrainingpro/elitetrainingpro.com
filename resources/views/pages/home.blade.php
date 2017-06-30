@@ -17,7 +17,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-12">
-			<h1>This is the coach's home page.</h1>
+			<h1>Welcome {{ Auth::user()->name }}</h1>
 
 			<div id="ProfilePage">
 			    <div id="LeftCol">
@@ -46,9 +46,29 @@
 			    <div style="clear:both"></div>
 			</div>
 			<div id="athlete">
-			
-			</div>
+				@if(count($athletes)>1)
+					<h3>Your Athletes</h3>
+					
+					<?php $index = sizeof($athletes)-count($athletes); ?>
+					@foreach($athletes as $athlete)
+						<div id="Profile">
+			    			<div id="Lefts">
+			      				<div id="Photo"> <img src="{{ URL::asset('assets/avatars/uploads/' . $athlete[$index]->image) }}" alt="No image found" height="80px" width="80px"> </div><br/>
+			      				<!-- Have to index +1 because merged two together -->
+			      				<div>{{ $athlete[$index+1]->name }}</div>
+			   				 </div>
 
+			   				 <div id="Infos">
+								<!-- Have to index by the size of the array and offset by the count -->
+								<p><span> {{ $athlete[$index]->email }} </span></p>
+								<p><span> {{ $athlete[$index]->city }}, {{ $athlete[$index]->state }} </span></p>
+								<p> <span> {{ substr(strip_tags($athlete[$index]->bio),0, 300) }}{{ strlen(strip_tags($bio->bio)) > 150 ? "..." : "" }} </span></p>
+							</div>
+							<div style="clear:both"></div>
+						</div>
+					@endforeach
+				@endif
+			</div>
 		</div>
 	</div>
 </div>
