@@ -145,7 +145,7 @@ $(document).ready(function() {
         selectHelper: true,
         select: function(date){
            date = moment(date.format());
-           $('#date').val(date.format('YYYY-MM-DD'));
+           $('input.date').val(date.format('YYYY-MM-DD'));
            jQuery.noConflict();
            $('#addTraining').modal('toggle');
         },
