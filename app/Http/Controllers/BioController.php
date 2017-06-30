@@ -46,7 +46,7 @@ class BioController extends Controller
             'state' => 'required',
             'bio' => 'required|max:191',
             'identity' => 'required',
-            'image' => 'sometimes|image'
+            'image' => 'sometimes|image|max:2000'
         ));
         
         // store in the database

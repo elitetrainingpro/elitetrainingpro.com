@@ -12,7 +12,7 @@
 		{{ Form::number('sets', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
 		{{ Form::label('date', 'Date:') }}
 		<br/>
-		{{ Form::date('date', \Carbon\Carbon::now()) }}<br/><br/>
+		{{ Form::date('date', \Carbon\Carbon::now(), ['class' => 'date', 'readonly' => 'true']) }}<br/><br/>
 		{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_strength', 'class' => 'btn btn-success')) }}
 	{!! Form::close() !!}
 @endsection
@@ -27,7 +27,7 @@
 		{{ Form::number('event_time', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
 		{{ Form::label('date', 'Date:') }}
 		<br/>
-		{{ Form::date('date', \Carbon\Carbon::now()) }}<br/><br/>
+		{{ Form::date('date', \Carbon\Carbon::now(), ['class' => 'date', 'readonly' => 'true']) }}<br/><br/>
 		{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_endurance', 'class' => 'btn btn-success')) }}
 	{!! Form::close() !!}
 @endsection
@@ -42,7 +42,7 @@
 		{{ Form::number('sets', 'null', ['class' => 'form-control', 'required' => '']) }}
 		{{ Form::label('date', 'Date:') }}
 		<br>
-		{{ Form::date('date', \Carbon\Carbon::now()) }}
+		{{ Form::date('date', \Carbon\Carbon::now(), ['class' => 'date', 'readonly' => 'true']) }}
 		<br><br>
 		{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_flexibility', 'class' => 'btn btn-success')) }}
 	{!! Form::close() !!}
@@ -58,7 +58,7 @@
 		{{ Form::number('sets', 'null', ['class' => 'form-control', 'required' => '']) }}
 		{{ Form::label('date', 'Date:') }}
 		<br>
-		{{ Form::date('date', \Carbon\Carbon::now()) }}
+		{{ Form::date('date', \Carbon\Carbon::now(), ['class' => 'date', 'readonly' => 'true']) }}
 		<br><br>
 		{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_balance', 'class' => 'btn btn-success')) }}
 	{!! Form::close() !!}
