@@ -195,3 +195,9 @@ body {
 	background: -moz-linear-gradient(#4D4D4D, #A1A1A1); /* For Firefox 3.6 to 15 */
 	background: linear-gradient(#4D4D4D, #A1A1A1); /* Standard syntax */
 }
+.navbar-brand2 {
+    padding: 14px 15px;
+    font-size: 18px;
+    line-height: 22px;
+    height: 50px;
+}

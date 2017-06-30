@@ -28,7 +28,13 @@
 	<div class="col-md-8">	
 	@foreach($findTrainers as $findTrainer)
 	<div class="panel panel-default">
-    <div class="panel-heading"><h3><img src="{{ URL::asset('assets/avatars/uploads/' . $findTrainer->image) }}" alt="No image found" height="75px" width="75px" style="border-radius:50%"> {{ $findTrainer->name }} <button>+</button></h3></div>
+    <div class="panel-heading"><h3><img src="{{ URL::asset('assets/avatars/uploads/' . $findTrainer->image) }}" alt="No image found" height="75px" width="75px" style="border-radius:50%"> {{ $findTrainer->name }} 
+    
+    {!! Form::open(['route' => 'findtrainer.store', 'data-parsley-validate' => '', 'files' => true]) !!}
+    	{{ Form::hidden('email',  $findTrainer->email) }}
+    	{{ Form::submit('+ Add', ['class' => 'btn btn-primary']) }}
+    {!! Form::close() !!}
+    </h3></div>
     <div class="panel-body">{{ $findTrainer->city }}, {{ $findTrainer->state }} {{ $findTrainer->email }} <br> {{ substr(strip_tags($findTrainer->bio),0, 300) }}{{ strlen(strip_tags($findTrainer->bio)) > 150 ? "..." : ""}}</div>
   </div>
 	@endforeach

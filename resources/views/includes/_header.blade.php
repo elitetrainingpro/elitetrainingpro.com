@@ -1,9 +1,9 @@
-<div class="navbar grad">
+<div class="navbar navbar-default navbar-static-top">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="col-sm-6 icon">
-					<h4 class="icon-style"><img src="{{ URL::asset('assets/images/elitetrainingpro.png') }}" alt="No image found" height="50px" width="50px">
+					<h4 class="icon-style"><img src="{{ URL::asset('assets/images/elitetrainingpro.png') }}" alt="No image found" height="45px" width="45px">
 					<a class="icon-link" href="home">Elite Training Pro</a></h4>
 				</div>
 				<div class="col-sm-6 nav">
@@ -11,7 +11,7 @@
 						{{ Auth::user()->name }}
 						@endif
 						<div class="dropdown">
-							<img class="dropdown-toggle" type="button" data-toggle="dropdown" src="{{ URL::asset('assets/avatars/default-user.png') }}" alt="No image found" height="50px" width="50px">
+							<img class="dropdown-toggle" type="button" data-toggle="dropdown" src="{{ URL::asset('assets/avatars/default-user.png') }}" alt="No image found" height="40px" width="40px">
 							<ul class="dropdown-menu">
 								@yield('navlinks')
 								<li>

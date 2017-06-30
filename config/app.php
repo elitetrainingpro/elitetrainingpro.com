@@ -163,6 +163,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -234,6 +235,7 @@ return [
       	'Html' => Collective\Html\HtmlFacade::class,
     	'Image' => Intervention\Image\Facades\Image::class,
     	'Purifier' => Mews\Purifier\Facades\Purifier::class,
+    	'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
 
     ],
 
