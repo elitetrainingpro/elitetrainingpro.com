@@ -234,6 +234,8 @@ class CalendarController extends Controller
             $note->save();
 
         }
+        $bio = DB::table('bios')->where('email', Auth::user()->email)->first();
+        return view('pages.athlete-calendar')->with('bio', $bio);
     }
 
     /**
