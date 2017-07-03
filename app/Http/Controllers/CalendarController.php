@@ -11,6 +11,7 @@ use App\BalanceWorkout;
 use App\StrengthWorkout;
 use App\EnduranceWorkout;
 use App\TrainingNote;
+use App\Event;
 use Image;
 use Purifier;
 
@@ -24,7 +25,32 @@ class CalendarController extends Controller
     public function index()
     {
     	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
-    	return view('pages.athlete-calendar')->with('bio', $bio);
+    	//$mytime = Carbon\Carbon::now();
+    	$date = date('Y-m');
+    	$year = date('Y');
+    	$month = date('m');
+    	//print_r(Auth::user()->id);die();
+    	$strengths = DB::table('strength_workouts')->where('user_id', Auth::user()->id)->get();
+    	//$strength = DB::table('strength_workouts')->whereYear('date', '=', $year)
+//     	->whereMonth('date', '=', $month)
+//     	->get();
+// 		$events = array();
+// 		foreach($strengths as $strength){
+// 			$event = new StrengthWorkout();
+// 			$event->user_id = $strength->user_id;
+// 			$event->name = $strength->name;
+// 			$event->weight = $strength->weight;
+// 			$event->reps = $strength->reps;
+// 			$event->sets = $strength->sets;
+// 			$event->date = $strength->date;
+// 			$event->save();
+// 			array_push($events, $event);
+// 		}
+    	$data = array(
+    		'bio' => $bio,
+    		'strengths' => $strengths
+    	);
+    	return view('pages.athlete-calendar')->with($data);
     }
 
     /**

@@ -42,6 +42,9 @@
 	<div class="row">
 		<div class="col-sm-8">
 			<h1>Calendar</h1>
+<!-- 			@foreach ($strengths as $strength) -->
+<!-- 			    <p>This is  {{ $strength->user_id }}</p> -->
+<!-- 			@endforeach -->
 		</div>
 	</div>
 
@@ -130,6 +133,7 @@
 </div>
 
 <div id="calendar"></div>
+
 <script>
 $(document).ready(function() {
     var BASEURL = "{{ url('/') }}";
