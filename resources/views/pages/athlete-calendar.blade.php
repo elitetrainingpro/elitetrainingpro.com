@@ -1,4 +1,4 @@
-@extends('layouts.calendar')
+@extends('layouts.calendar', ['variable' => $strengths])
 
 @section('strength')
 	{!! Form::open(['route' => 'athletecalendar.store', 'data-parsley-validate' => '', 'files' => true]) !!}
