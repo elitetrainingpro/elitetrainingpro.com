@@ -27,3 +27,5 @@ Route::resource('goals', 'GoalController');
 Route::resource('findtrainer', 'FindTrainerController');
 Route::resource('athletecalendar', 'CalendarController');
 Route::resource('bios', 'BioController');
+Route::resource('coachcalendar', 'CoachCalendarController');
+Route::resource('coachgoal', 'CoachGoalController');
