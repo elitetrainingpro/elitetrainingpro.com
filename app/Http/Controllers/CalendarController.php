@@ -29,25 +29,17 @@ class CalendarController extends Controller
     	$date = date('Y-m');
     	$year = date('Y');
     	$month = date('m');
-    	//print_r(Auth::user()->id);die();
+    	
     	$strengths = DB::table('strength_workouts')->where('user_id', Auth::user()->id)->get();
-    	//$strength = DB::table('strength_workouts')->whereYear('date', '=', $year)
-//     	->whereMonth('date', '=', $month)
-//     	->get();
-// 		$events = array();
-// 		foreach($strengths as $strength){
-// 			$event = new StrengthWorkout();
-// 			$event->user_id = $strength->user_id;
-// 			$event->name = $strength->name;
-// 			$event->weight = $strength->weight;
-// 			$event->reps = $strength->reps;
-// 			$event->sets = $strength->sets;
-// 			$event->date = $strength->date;
-// 			$event->save();
-// 			array_push($events, $event);
-// 		}
+    	$endurances = DB::table('endurance_workouts')->where('user_id', Auth::user()->id)->get();
+    	$balances = DB::table('balance_workouts')->where('user_id', Auth::user()->id)->get();
+    	$flexibilities = DB::table('flexibility_workouts')->where('user_id', Auth::user()->id)->get();
+    	
     	$data = array(
     		'bio' => $bio,
+    		'endurances' => $endurances,
+    		'balances' => $balances,
+    		'flexibilities' => $flexibilities,
     		'strengths' => $strengths
     	);
     	return view('pages.athlete-calendar')->with($data);
