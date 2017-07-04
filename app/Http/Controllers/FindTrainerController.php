@@ -69,6 +69,31 @@ class FindTrainerController extends Controller
     		$workout->save();
     	}
 
+
+        //SEND COACH INFO
+            if ($bio->identity == 'Athlete'){
+                $coachToAthletes = DB::table('athlete_to_coaches')->where('athlete_id', $bio->user_id)->get();
+
+                    $coaches = array();
+
+                    foreach($coachToAthletes as $coachToAthlete){
+                    //getting Athlete Bio
+                    $coachBio = DB::table('bios')->where('user_id', $coachToAthlete->coach_id)->get();
+                    // Getting Athlete's Name
+                    $coachName = DB::table('users')->where('id', $coachToAthlete->coach_id)->get();
+                    // Merging them into one
+                    $coach = $coachBio->merge($coachName);
+                    array_push($coaches, $coach);
+                }
+
+                // data
+                $data = array(
+                    'bio' => $bio,
+                    'coaches' => $coaches
+                );
+                return view('pages.athletes-home')->with($data);
+            }
+
     	// return to the athlete's home page
     	return view('pages.athletes-home')->with('bio', $bio);
     }

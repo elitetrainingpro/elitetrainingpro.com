@@ -13,7 +13,19 @@ class AthleteHomeController extends Controller
      */
     public function index()
     {
-        //
+        $bio = DB::table('bios')->where('email', Auth::user()->email)->first();
+
+
+        if ($bio->identity != NULL) {
+            if ($bio->identity == 'Athlete'){
+
+                 return view('pages.athletes-home')->with('bio',$bio);
+            } else {
+                return view('pages.home')->with('bio',$bio);
+            }
+        } else { // If identity is null then go to bio page (This should never ever happen)
+            return view('pages.bio');
+        }
     }
 
     /**
