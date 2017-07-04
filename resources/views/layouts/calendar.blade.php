@@ -42,9 +42,6 @@
 	<div class="row">
 		<div class="col-sm-8">
 			<h1>Calendar</h1>
-<!-- 			@foreach ($strengths as $strength) -->
-<!-- 			    <p>This is  {{ $strength->user_id }}</p> -->
-<!-- 			@endforeach -->
 		</div>
 	</div>
 
@@ -148,6 +145,7 @@ $(document).ready(function() {
         selectable: true,
         selectHelper: true,
         select: function(date){
+            alert("date");
            date = moment(date.format());
            $('input.date').val(date.format('YYYY-MM-DD'));
            jQuery.noConflict();
@@ -201,6 +199,16 @@ $(document).ready(function() {
 		            start  : <?php echo json_encode($balance->date); ?>
 		        },
 		        @endforeach
+		        @foreach($notes as $note)		    	
+		        {
+		            title  : <?php echo json_encode($note->name); ?>,
+				    data   : {
+				    	identity: 'notes',
+				    	notes: <?php echo json_encode($note->notes); ?>,
+				    },
+		            start  : <?php echo json_encode($note->date); ?>
+		        },
+		        @endforeach
 		        
 		    ],
 		    color: 'black',     // an option!
@@ -216,6 +224,8 @@ $(document).ready(function() {
 		        alert('Workout: ' + event.title + '\n' + 'Time: ' + event.data.time + '\n' + 'Sets: ' + event.data.sets + '\n');
 			} else if (event.data.identity == 'flexibility') {
 		        alert('Workout: ' + event.title + '\n' + 'Time: ' + event.data.time + '\n' + 'Sets: ' + event.data.sets + '\n');
+			} else if (event.data.identity == 'notes') {
+		        alert('Title: ' + event.title + '\n' + 'Note: ' + event.data.notes + '\n');
 			}
 
 	    }
