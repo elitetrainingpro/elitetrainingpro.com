@@ -46,7 +46,7 @@
 			    <div style="clear:both"></div>
 			</div>
 			<div id="athlete">
-				@if(count($athletes)>1)
+				@if(count($athletes)>=1)
 					<h3>Your Athletes</h3>
 					
 					<?php $index = sizeof($athletes)-count($athletes); ?>
