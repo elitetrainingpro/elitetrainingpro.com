@@ -46,7 +46,7 @@
 			    <div style="clear:both"></div>
 			</div>
 			<div id="athlete">
-				@if(count($athletes)>1)
+				@if(count($athletes)>=1)
 					<h3>Your Athletes</h3>
 					
 					<?php $index = sizeof($athletes)-count($athletes); ?>
@@ -63,6 +63,10 @@
 								<p><span> {{ $athlete[$index]->email }} </span></p>
 								<p><span> {{ $athlete[$index]->city }}, {{ $athlete[$index]->state }} </span></p>
 								<p> <span> {{ substr(strip_tags($athlete[$index]->bio),0, 300) }}{{ strlen(strip_tags($bio->bio)) > 150 ? "..." : "" }} </span></p>
+								{!! Form::open(['route' => 'coachcalendar.store', 'data-parsley-validate' => '', 'files' => true]) !!}
+							    	{{ Form::hidden('email',  $athlete[$index]->email) }}
+							    	{{ Form::submit('View Athlete', ['class' => 'btn btn-primary']) }}
+							    {!! Form::close() !!}
 							</div>
 							<div style="clear:both"></div>
 						</div>

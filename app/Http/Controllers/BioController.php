@@ -67,6 +67,7 @@ class BioController extends Controller
             $bio->image = $filename;
         }
         else {
+            die('Else before array');
             return view('pages.bio');
         }
         
@@ -74,14 +75,26 @@ class BioController extends Controller
         
         if ($bio->identity != NULL) {
             if ($bio->identity == 'Coach'){
-                return view('pages.home')->with('bio', $bio);
+
+                $athletes = (object)array();
+                $data = array(
+                    'bio' => $bio,
+                    'athletes' => $athletes
+                );
+                return view('pages.home')->with($data);
             } else {
-                return view('pages.athletes-home')->with('bio', $bio);
+                $coaches = (object)array();
+                $data = array(
+                    'bio' => $bio,
+                    'coaches' => $coaches
+                );
+                return view('pages.athletes-home')->with($data);
             }
         }else { // If identity is null then go to bio page (This should never ever happen)
+            die('After If statement');
             return view('pages.bio');
         }
-        return redirect()->route('bios.show', $bio->id);
+        //return redirect()->route('bios.show', $bio->id);
         // redirect to another page
         
     }
@@ -94,18 +107,7 @@ class BioController extends Controller
      */
     public function show($id)
     {
-        // May not need this code but lets keep it for now.
-//      $bio = Bio::find($id);
-        
-//      if ($bio->identity != NULL) {
-//          if ($bio->identity == 'Coach'){
-//              return view('pages.home')->with('bio', $bio);
-//          } else {
-//              return view('pages.athletes-home')->with('bio', $bio);
-//          }
-//      }else { // If identity is null then go to bio page (This should never ever happen)
-//          return view('pages.bio');
-//      }
+        //
     }
 
     /**

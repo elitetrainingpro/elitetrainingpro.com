@@ -11,6 +11,7 @@ use App\BalanceWorkout;
 use App\StrengthWorkout;
 use App\EnduranceWorkout;
 use App\TrainingNote;
+use App\Event;
 use Image;
 use Purifier;
 
@@ -24,7 +25,22 @@ class CalendarController extends Controller
     public function index()
     {
     	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
-    	return view('pages.athlete-calendar')->with('bio', $bio);
+    	
+    	$strengths = DB::table('strength_workouts')->where('user_id', $bio->user_id)->get();
+    	$endurances = DB::table('endurance_workouts')->where('user_id', $bio->user_id)->get();
+    	$balances = DB::table('balance_workouts')->where('user_id', $bio->user_id)->get();
+    	$flexibilities = DB::table('flexibility_workouts')->where('user_id', $bio->user_id)->get();
+    	$notes = DB::table('training_notes')->where('user_id', $bio->user_id)->get();
+    	
+    	$data = array(
+    		'bio' => $bio,
+    		'endurances' => $endurances,
+    		'balances' => $balances,
+    		'flexibilities' => $flexibilities,
+    		'strengths' => $strengths,
+    		'notes'=> $notes
+    	);
+    	return view('pages.athlete-calendar')->with($data);
     }
 
     /**
@@ -234,8 +250,23 @@ class CalendarController extends Controller
             $note->save();
 
         }
+        
         $bio = DB::table('bios')->where('email', Auth::user()->email)->first();
-        return view('pages.athlete-calendar')->with('bio', $bio);
+        $strengths = DB::table('strength_workouts')->where('user_id', $bio->user_id)->get();
+        $endurances = DB::table('endurance_workouts')->where('user_id', $bio->user_id)->get();
+        $balances = DB::table('balance_workouts')->where('user_id', $bio->user_id)->get();
+        $flexibilities = DB::table('flexibility_workouts')->where('user_id', $bio->user_id)->get();
+        $notes = DB::table('training_notes')->where('user_id', $bio->user_id)->get();
+        
+        $data = array(
+        		'bio' => $bio,
+        		'endurances' => $endurances,
+        		'balances' => $balances,
+        		'flexibilities' => $flexibilities,
+        		'strengths' => $strengths,
+        		'notes'=> $notes
+        );
+        return view('pages.coach-calendar')->with($data);
     }
 
     /**
