@@ -41,9 +41,6 @@
 	<div class="row">
 		<div class="col-sm-8">
 			<h1>Calendar</h1>
-<!-- 			@foreach ($strengths as $strength) -->
-<!-- 			    <p>This is  {{ $strength->user_id }}</p> -->
-<!-- 			@endforeach -->
 		</div>
 	</div>
 
@@ -68,14 +65,6 @@
 						<!-- Training Tab in Modal-->
 						<div class="tab-pane active" id="training">
 							@yield('trainingNotes')
-						</div>
-						<!-- Nutrition Tab in Modal-->
-						<div class="tab-pane" id="nutrition">
-							@yield('nutritionNotes')
-						</div>
-						<!-- Medical Tab in Modal-->
-						<div class="tab-pane" id="medical">
-							@yield('medicalNotes')
 						</div>
 					</div>
 				</div>
@@ -109,28 +98,83 @@ $(document).ready(function() {
            $('#addTraining').modal('toggle');
         },
         events: BASEURL + '/events',
-        eventSources: [
-		{
+        eventSources: [{
 		    events: [ // put the array in the `events` property
+		    	@foreach($strengths as $strength)		    	
 		        {
-		            title  : 'event1',
-		            start  : '2017-06-01'
+		            title  : <?php echo json_encode($strength->name); ?>,
+				    data   : {
+					    identity: 'strength',
+				    	weight: <?php echo json_encode($strength->weight); ?>,
+						reps: <?php echo json_encode($strength->reps); ?>,
+						sets: <?php echo json_encode($strength->sets); ?>
+				    },
+		            start  : <?php echo json_encode($strength->date); ?>
 		        },
+		        @endforeach
+		        @foreach($endurances as $endurance)		    	
 		        {
-		            title  : 'event2',
-		            start  : '2017-06-05',
-		            end    : '2017-06-07'
+		            title  : <?php echo json_encode($endurance->name); ?>,
+				    data   : {
+				    	identity: 'endurance',
+				    	distance: <?php echo json_encode($endurance->distance); ?>,
+						event_time: <?php echo json_encode($endurance->event_time); ?>
+				    },
+		            start  : <?php echo json_encode($endurance->date); ?>
 		        },
+		        @endforeach
+		        @foreach($flexibilities as $flexibility)		    	
 		        {
-		            title  : 'event3',
-		            start  : '2017-06-09T12:30:00',
-		        }
+		            title  : <?php echo json_encode($flexibility->name); ?>,
+				    data   : {
+				    	identity: 'flexibility',
+				    	time: <?php echo json_encode($flexibility->time); ?>,
+						sets: <?php echo json_encode($flexibility->sets); ?>
+				    },
+		            start  : <?php echo json_encode($flexibility->date); ?>
+		        },
+		        @endforeach
+		        @foreach($balances as $balance)		    	
+		        {
+		            title  : <?php echo json_encode($balance->name); ?>,
+				    data   : {
+				    	identity: 'flexibility',
+				    	time: <?php echo json_encode($balance->time); ?>,
+						sets: <?php echo json_encode($balance->sets); ?>
+				    },
+		            start  : <?php echo json_encode($balance->date); ?>
+		        },
+		        @endforeach
+		        @foreach($notes as $note)		    	
+		        {
+		            title  : <?php echo json_encode($note->name); ?>,
+				    data   : {
+				    	identity: 'notes',
+				    	notes: <?php echo json_encode($note->notes); ?>,
+				    },
+		            start  : <?php echo json_encode($note->date); ?>
+		        },
+		        @endforeach
 		    ],
 		    color: 'black',     // an option!
 		    textColor: 'yellow' // an option!
-		}
-		]
-		    });
-		});
+		}],
+		
+	    eventClick: function(event) {
+		    if (event.data.identity == 'strength') {
+		        alert('Workout: ' + event.title + '\n' + 'Weight: ' + event.data.weight + '\n' + 'Reps: ' + event.data.reps + '\n' + 'Sets: ' + event.data.sets);
+			} else if (event.data.identity == 'endurance') {
+		        alert('Workout: ' + event.title + '\n' + 'Distance: ' + event.data.distance + '\n' + 'Event Time: ' + event.data.event_time + '\n');
+			} else if (event.data.identity == 'flexibility') {
+		        alert('Workout: ' + event.title + '\n' + 'Time: ' + event.data.time + '\n' + 'Sets: ' + event.data.sets + '\n');
+			} else if (event.data.identity == 'flexibility') {
+		        alert('Workout: ' + event.title + '\n' + 'Time: ' + event.data.time + '\n' + 'Sets: ' + event.data.sets + '\n');
+			} else if (event.data.identity == 'notes') {
+		        alert('Title: ' + event.title + '\n' + 'Note: ' + event.data.notes + '\n');
+			}
+
+	    }
+	});
+});
 </script>
 @endsection
