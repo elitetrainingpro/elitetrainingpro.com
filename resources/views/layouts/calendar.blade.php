@@ -29,19 +29,12 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="dropdown">
-				<button class="btn btn-black">Logs</button>
 				<div class="dropdown-content" style="left:0;">
 					<a href="#">Training</a>
 					<a href="#">Notes</a>
 				</div>
 			</div>
-			<button class="btn btn-default" data-toggle="modal" data-target="#addTraining"> + Training </button>
 			<button class="btn btn-default" data-toggle="modal" data-target="#addNote"> + Note</button>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-8">
-			<h1>Calendar</h1>
 		</div>
 	</div>
 
@@ -135,17 +128,24 @@
 $(document).ready(function() {
     var BASEURL = "{{ url('/') }}";
     $('#calendar').fullCalendar({
+    	eventLimit: true, // for all non-agenda views
+        views: {
+            agenda: {
+                eventLimit: 6 // adjust to 6 only for agendaWeek/agendaDay
+            }
+        },
         header: {
             left: 'prev,next today',
             center: 'title',
             right: 'month,basicWeek,basicDay'
         },
         navLinks: true,
+        displayEventTime: false,
+        
         editable: false,
         selectable: true,
         selectHelper: true,
         select: function(date){
-            alert("date");
            date = moment(date.format());
            $('input.date').val(date.format('YYYY-MM-DD'));
            jQuery.noConflict();
@@ -211,8 +211,8 @@ $(document).ready(function() {
 		        @endforeach
 		        
 		    ],
-		    color: 'black',     // an option!
-		    textColor: 'yellow' // an option!
+		    color: '#127c96',     // an option!
+		    textColor: '#efefef' // an option!
 		}],
 		
 	    eventClick: function(event) {
