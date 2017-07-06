@@ -82,6 +82,12 @@
 $(document).ready(function() {
     var BASEURL = "{{ url('/') }}";
     $('#calendar').fullCalendar({
+    	eventLimit: true, // for all non-agenda views
+        views: {
+            agenda: {
+                eventLimit: 6 // adjust to 6 only for agendaWeek/agendaDay
+            }
+        },
         header: {
             left: 'prev,next today',
             center: 'title',
@@ -156,8 +162,8 @@ $(document).ready(function() {
 		        },
 		        @endforeach
 		    ],
-		    color: 'black',     // an option!
-		    textColor: 'yellow' // an option!
+		    color: '#127c96',     // an option!
+		    textColor: '#efefef' // an option!
 		}],
 		
 	    eventClick: function(event) {

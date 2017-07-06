@@ -266,7 +266,7 @@ class CalendarController extends Controller
         		'strengths' => $strengths,
         		'notes'=> $notes
         );
-        return view('pages.coach-calendar')->with($data);
+        return view('pages.athlete-calendar')->with($data);
     }
 
     /**
