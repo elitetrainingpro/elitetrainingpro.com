@@ -18,19 +18,21 @@
 @section('content')
 <div class="container">
     <div class="row">
-    <div class="col-md-12 text-center">
-    	<h2>{{ $athlete->name }}'s Goals</h2>
+    <div class="col-md-12">
     	{!! Form::open(['route' => 'coachcalendar.store', 'data-parsley-validate' => '', 'files' => true]) !!}
 			{{ Form::hidden('email',  $athlete->email) }}
 			{{ Form::submit('View Calendar', ['class' => 'btn btn-primary']) }}
 		{!! Form::close() !!}
     </div>
+    <div class="col-md-12 text-center">
+    	<h2>{{ $athlete->name }}'s Goals</h2>
+    	<p style="color:red">Previous workouts do not count towards newly created goals.</p>
+    </div>
     @foreach($charts as $chart)
-    	<div class="col-md-4">
+    	<div class="col-md-3">
     		{!! $chart->render() !!}
     	</div>
 	@endforeach
-    </div>
-    
+    </div>  
 </div>
 @endsection
