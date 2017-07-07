@@ -19,14 +19,12 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-        	<div class="dropdown">
-				<div class="dropdown-content" style="left:0;">
-					<a href="#">Training</a>
-					<a href="#">Notes</a>
-				</div>
-			</div>
-			<button class="btn btn-default" data-toggle="modal" data-target="#addGoal"> + Goal </button>
+        <div class="col-md-8">
+			<button class="btn btn-primary" data-toggle="modal" data-target="#addGoal"> + Goal </button>
+        </div>
+        <div class="col-md-12 text-center">
+			<h1>Your Goals</h1>
+			<p style="color:red">Previous workouts will not count towards newly created goals.</p>
         </div>
         <!-- Add Goal Modal -->
 		<div class="modal fade" id="addGoal" role="dialog">
@@ -38,140 +36,119 @@
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title">Add Goal</h4>
 					</div>
+					<ul class="nav nav-tabs" id="tabContent">
+						<li class="active"><a href="#strength" data-toggle="tab">Strength</a></li>
+						<li><a href="#endurance" data-toggle="tab">Endruance</a></li>
+						<li><a href="#flexibility" data-toggle="tab">Flexibility</a></li>
+						<li><a href="#balance" data-toggle="tab">Balance</a><li>
+					</ul>
 					<div class="modal-body">
-						<div class="tab">
-						  <button class="tablinks" onclick="openCity(event, 'Endurance')" id="defaultOpen">Endurance</button>
-						  <button class="tablinks" onclick="openCity(event, 'Flexibility')">Flexibility</button>
-						  <button class="tablinks" onclick="openCity(event, 'Strength')">Strength</button>
-						  <button class="tablinks" onclick="openCity(event, 'Balance')">Balance</button>
+						<div class="tab-content">
+							<!-- Strength Tab in Modal-->
+							<div class="tab-pane active" id="strength">
+								<h3>Strength</h3>
+								{!! Form::open(['route' => 'goals.store', 'data-parsley-validate' => '', 'files' => true]) !!}<br>
+									{{ Form::label('goal_type', 'Goal Type:') }}
+								  	{{ Form::select('goal_type',[
+									    'Goal Type' => [
+									    				null => 'Please Select',
+														'Weekly' => 'Weekly',
+														'Monthly' => 'Monthly',
+														'Seasonal' => 'Seasonal',
+													],
+									], null, ['required']) }}<br>
+									{{ Form::label('name', 'Workout Name:') }}
+									{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '191']) }}
+									{{ Form::label('weight', 'Weight:') }}
+							        {{ Form::number('weight', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
+									{{ Form::label('reps', 'Reps:') }}
+									{{ Form::number('reps', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
+									{{ Form::label('sets', 'Sets:') }}
+									{{ Form::number('sets', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
+									{{ Form::label('date', 'Goal Set Date:') }}
+									<br>
+									{{ Form::date('date', \Carbon\Carbon::now()) }}<br/><br/>
+									{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_strength', 'class' => 'btn btn-success')) }}
+								{!! Form::close() !!}
+							</div>
+							<!-- Endruance Tab in Modal-->
+							<div class="tab-pane" id="endurance">
+								<h3>Endurance</h3>
+								{!! Form::open(['route' => 'goals.store', 'data-parsley-validate' => '', 'files' => true]) !!}<br>
+								  	{{ Form::label('goal_type', 'Goal Type:') }}
+								  	{{ Form::select('goal_type',[
+									    'Goal Type' => [
+									    				null => 'Please Select',
+														'Weekly' => 'Weekly',
+														'Monthly' => 'Monthly',
+														'Seasonal' => 'Seasonal',
+													],
+									], null, ['required']) }}<br>
+									{{ Form::label('name', 'Workout Name:') }}
+									{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '191']) }}
+									{{ Form::label('distance', 'Distance (miles):') }}
+							        {{ Form::number('distance', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
+									{{ Form::label('event_time', 'Time (minutes):') }}
+									{{ Form::number('event_time', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
+									{{ Form::label('date', 'Goal Set Date:') }}
+									<br>
+									{{ Form::date('date', \Carbon\Carbon::now()) }}<br/><br/>
+									{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_endurance', 'class' => 'btn btn-success')) }}
+								{!! Form::close() !!}
+							</div>
+							<!-- Flexibility Tab in Modal-->
+							<div class="tab-pane" id="flexibility">
+								<h3>Flexibility</h3>
+								{!! Form::open(['route' => 'goals.store', 'data-parsley-validate' => '', 'files' => true]) !!}<br>
+									{{ Form::label('goal_type', 'Goal Type:') }}
+								  	{{ Form::select('goal_type',[
+									    'Goal Type' => [
+									    				null => 'Please Select',
+														'Weekly' => 'Weekly',
+														'Monthly' => 'Monthly',
+														'Seasonal' => 'Seasonal',
+													],
+									], null, ['required']) }}<br>
+									{{ Form::label('name', 'Workout Name:') }}
+									{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '191']) }}
+									{{ Form::label('time', 'Time (In minutes):') }}
+									{{ Form::number('time', 'null', ['class' => 'form-control', 'required' => '']) }}
+									{{ Form::label('sets', 'Sets:') }}
+									{{ Form::number('sets', 'null', ['class' => 'form-control', 'required' => '']) }}
+									{{ Form::label('date', 'Goal Set Date:') }}
+									<br>
+									{{ Form::date('date', \Carbon\Carbon::now()) }}
+									<br><br>
+									{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_flexibility', 'class' => 'btn btn-success')) }}
+								{!! Form::close() !!}
+							</div>
+							<!-- Balance Tab in Modal-->
+							<div class="tab-pane" id="balance">
+								<h3>Balance</h3>
+								{!! Form::open(['route' => 'goals.store', 'data-parsley-validate' => '', 'files' => true]) !!}<br>
+									{{ Form::label('goal_type', 'Goal Type:') }}
+								  	{{ Form::select('goal_type',[
+									    'Goal Type' => [
+									    				null => 'Please Select',
+														'weekly' => 'Weekly',
+														'monthly' => 'Monthly',
+														'seasonal' => 'Seasonal',
+													],
+									], null, ['required']) }}<br>
+									{{ Form::label('name', 'Workout Name:') }}
+									{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '191']) }}
+									{{ Form::label('time', 'Time (In minutes):') }}
+									{{ Form::number('time', 'null', ['class' => 'form-control', 'required' => '']) }}
+									{{ Form::label('sets', 'Sets:') }}
+									{{ Form::number('sets', 'null', ['class' => 'form-control', 'required' => '']) }}
+									{{ Form::label('date', 'Goal Set Date:') }}
+									<br>
+									{{ Form::date('date', \Carbon\Carbon::now()) }}
+									<br><br>
+									{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_balance', 'class' => 'btn btn-success')) }}
+								{!! Form::close() !!}
+							</div>
 						</div>
-						
-						<div id="Endurance" class="tabcontent">
-						  <h3>Endurance</h3>
-						  <hr>
-						  {!! Form::open(['route' => 'goals.store', 'data-parsley-validate' => '', 'files' => true]) !!}<br>
-						  	{{ Form::label('goal_type', 'Goal Type:') }}
-						  	{{ Form::select('goal_type',[
-							    'Goal Type' => [
-							    				null => 'Please Select',
-												'Weekly' => 'Weekly',
-												'Monthly' => 'Monthly',
-												'Seasonal' => 'Seasonal',
-											],
-							], null, ['required']) }}
-							{{ Form::label('name', 'Workout Name:') }}
-							{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '191']) }}
-							{{ Form::label('distance', 'Distance (miles):') }}
-					        {{ Form::number('distance', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
-							{{ Form::label('event_time', 'Time (minutes):') }}
-							{{ Form::number('event_time', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
-							{{ Form::label('date', 'Date:') }}
-							<br>
-							{{ Form::date('date', \Carbon\Carbon::now()) }}<br/><br/>
-							{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_endurance', 'class' => 'btn btn-success')) }}
-						{!! Form::close() !!}
-						</div>
-						
-						<div id="Flexibility" class="tabcontent">
-						  <h3>Flexibility</h3>
-						  <hr>
-						  {!! Form::open(['route' => 'goals.store', 'data-parsley-validate' => '', 'files' => true]) !!}<br>
-							{{ Form::label('goal_type', 'Goal Type:') }}
-						  	{{ Form::select('goal_type',[
-							    'Goal Type' => [
-							    				null => 'Please Select',
-												'Weekly' => 'Weekly',
-												'Monthly' => 'Monthly',
-												'Seasonal' => 'Seasonal',
-											],
-							], null, ['required']) }}
-							{{ Form::label('name', 'Workout Name:') }}
-							{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '191']) }}
-							{{ Form::label('time', 'Time (In minutes):') }}
-							{{ Form::number('time', 'null', ['class' => 'form-control', 'required' => '']) }}
-							{{ Form::label('sets', 'Sets:') }}
-							{{ Form::number('sets', 'null', ['class' => 'form-control', 'required' => '']) }}
-							{{ Form::label('date', 'Date:') }}
-							<br>
-							{{ Form::date('date', \Carbon\Carbon::now()) }}
-							<br><br>
-							{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_flexibility', 'class' => 'btn btn-success')) }}
-						{!! Form::close() !!}
-						</div>
-						
-						<div id="Strength" class="tabcontent">
-						  <h3>Strength</h3>
-						  <hr>
-						  {!! Form::open(['route' => 'goals.store', 'data-parsley-validate' => '', 'files' => true]) !!}<br>
-							{{ Form::label('goal_type', 'Goal Type:') }}
-						  	{{ Form::select('goal_type',[
-							    'Goal Type' => [
-							    				null => 'Please Select',
-												'Weekly' => 'Weekly',
-												'Monthly' => 'Monthly',
-												'Seasonal' => 'Seasonal',
-											],
-							], null, ['required']) }}
-							{{ Form::label('name', 'Workout Name:') }}
-							{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '191']) }}
-							{{ Form::label('weight', 'Weight:') }}
-					        {{ Form::number('weight', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
-							{{ Form::label('reps', 'Reps:') }}
-							{{ Form::number('reps', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
-							{{ Form::label('sets', 'Sets:') }}
-							{{ Form::number('sets', 'null', ['class' => 'form-control', 'required', 'step'=>'any']) }}
-							{{ Form::label('date', 'Date:') }}
-							<br>
-							{{ Form::date('date', \Carbon\Carbon::now()) }}<br/><br/>
-							{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_strength', 'class' => 'btn btn-success')) }}
-						{!! Form::close() !!}
-						</div>
-						
-						<div id="Balance" class="tabcontent">
-						  <h3>Balance</h3>
-						  <hr>
-						  {!! Form::open(['route' => 'goals.store', 'data-parsley-validate' => '', 'files' => true]) !!}<br>
-							{{ Form::label('goal_type', 'Goal Type:') }}
-						  	{{ Form::select('goal_type',[
-							    'Goal Type' => [
-							    				null => 'Please Select',
-												'weekly' => 'Weekly',
-												'monthly' => 'Monthly',
-												'seasonal' => 'Seasonal',
-											],
-							], null, ['required']) }}
-							{{ Form::label('name', 'Workout Name:') }}
-							{{ Form::text('name', null, ['class' => 'form-control', 'required' => '', 'maxlength' => '191']) }}
-							{{ Form::label('time', 'Time (In minutes):') }}
-							{{ Form::number('time', 'null', ['class' => 'form-control', 'required' => '']) }}
-							{{ Form::label('sets', 'Sets:') }}
-							{{ Form::number('sets', 'null', ['class' => 'form-control', 'required' => '']) }}
-							{{ Form::label('date', 'Date:') }}
-							<br>
-							{{ Form::date('date', \Carbon\Carbon::now()) }}
-							<br><br>
-							{{ Form::submit( 'Submit', array('type' => 'submit', 'name' => 'submit_balance', 'class' => 'btn btn-success')) }}
-						{!! Form::close() !!}
-						</div>
-						
-						<script>
-							function openCity(evt, cityName) {
-							    var i, tabcontent, tablinks;
-							    tabcontent = document.getElementsByClassName("tabcontent");
-							    for (i = 0; i < tabcontent.length; i++) {
-							        tabcontent[i].style.display = "none";
-							    }
-							    tablinks = document.getElementsByClassName("tablinks");
-							    for (i = 0; i < tablinks.length; i++) {
-							        tablinks[i].className = tablinks[i].className.replace(" active", "");
-							    }
-							    document.getElementById(cityName).style.display = "block";
-							    evt.currentTarget.className += " active";
-							}
-							
-							// Get the element with id="defaultOpen" and click on it
-							document.getElementById("defaultOpen").click();
-						</script>
 					</div>
 
 					<div class="modal-footer">
@@ -183,7 +160,7 @@
     </div>
     <div class="row">
     @foreach($charts as $chart)
-    	<div class="col-md-4">
+    	<div class="col-md-3">
     		{!! $chart->render() !!}
     	</div>
 	@endforeach
