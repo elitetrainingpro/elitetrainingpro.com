@@ -25,22 +25,19 @@
 @section('content')
 <div class="container">
 	<div class="row">
-		<div class="col-sm-12">
-			<div class="dropdown">
-				<div class="dropdown-content" style="left:0;">
-					<a href="#">Notes</a>
-				</div>
-			</div>
-			<button class="btn btn-default" data-toggle="modal" data-target="#addNote"> + Note</button>
+		<div class="col-sm-1">
+			<button class="btn btn-primary" data-toggle="modal" data-target="#addNote"> + Note</button>
+		</div>
+		<div class="col-sm-2">
 			{!! Form::open(['route' => 'coachgoal.store', 'data-parsley-validate' => '', 'files' => true]) !!}
 					{{ Form::hidden('email',  $bio->email) }}
-					{{ Form::submit('View Goals', ['class' => 'btn btn-default']) }}
+					{{ Form::submit('View Goals', ['class' => 'btn btn-primary']) }}
 			{!! Form::close() !!}
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-8">
-			<h1>Calendar</h1>
+		<div class="col-sm-12 text-center">
+			<h1>{{ $athlete->name }}'s Calendar</h1>
 		</div>
 	</div>
 
@@ -57,8 +54,6 @@
 				<!--Notes Tabs -->
 				<ul class="nav nav-tabs" id="tabContent">
 					<li class="active"><a href="#training" data-toggle="tab">Training</a></li>
-					<li><a href="#nutrition" data-toggle="tab">Nutrition</a></li>
-					<li><a href="#medical" data-toggle="tab">Medical</a><li>
 				</ul>
 				<div class="modal-body">
 					<div class="tab-content">
@@ -69,7 +64,7 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 				</div>
 			</div> 
 		</div>
@@ -82,12 +77,19 @@
 $(document).ready(function() {
     var BASEURL = "{{ url('/') }}";
     $('#calendar').fullCalendar({
+    	eventLimit: true, // for all non-agenda views
+        views: {
+            agenda: {
+                eventLimit: 6 // adjust to 6 only for agendaWeek/agendaDay
+            }
+        },
         header: {
             left: 'prev,next today',
             center: 'title',
             right: 'month,basicWeek,basicDay'
         },
         navLinks: true,
+        displayEventTime: false,
         editable: false,
         selectable: true,
         selectHelper: true,
@@ -156,8 +158,8 @@ $(document).ready(function() {
 		        },
 		        @endforeach
 		    ],
-		    color: 'black',     // an option!
-		    textColor: 'yellow' // an option!
+		    color: '#127c96',     // an option!
+		    textColor: '#efefef' // an option!
 		}],
 		
 	    eventClick: function(event) {

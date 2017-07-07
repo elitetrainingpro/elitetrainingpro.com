@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +14,7 @@ use App\TrainingNote;
 use App\Event;
 use Image;
 use Purifier;
+
 class CalendarController extends Controller
 {
     /**
@@ -39,6 +42,7 @@ class CalendarController extends Controller
     	);
     	return view('pages.athlete-calendar')->with($data);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -49,6 +53,7 @@ class CalendarController extends Controller
     	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
     	return view('pages.athlete-calendar')->with('bio', $bio);
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -228,6 +233,7 @@ class CalendarController extends Controller
     		}
     		
     	}else if ($request->has('submit_training_notes')) {
+
             // validate the data
             $this->validate($request, array(
                     'name' => 'required|max:191',
@@ -242,6 +248,7 @@ class CalendarController extends Controller
             $note->notes = $request->notes;
             $note->date = $request->date;
             $note->save();
+
         }
         
         $bio = DB::table('bios')->where('email', Auth::user()->email)->first();
@@ -261,6 +268,7 @@ class CalendarController extends Controller
         );
         return view('pages.athlete-calendar')->with($data);
     }
+
     /**
      * Display the specified resource.
      *
@@ -271,6 +279,7 @@ class CalendarController extends Controller
     {
         //
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -281,6 +290,7 @@ class CalendarController extends Controller
     {
         //
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -292,6 +302,7 @@ class CalendarController extends Controller
     {
         //
     }
+
     /**
      * Remove the specified resource from storage.
      *

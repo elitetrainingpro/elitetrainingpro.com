@@ -22,6 +22,7 @@ class GoalController extends Controller
      */
     public function index()
     {
+    	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
     	// Create Strength Goal Charts
      	$goals = DB::table('strength_goals')->where('user_id', Auth::user()->id)->get();
  		
@@ -79,8 +80,13 @@ class GoalController extends Controller
  			->width(0);
  			array_push($charts, $chart);
  		}
-
-     	return view('pages.goals', ['charts' => $charts]);
+		
+ 		$data = array(
+ 				'bio' => $bio,
+ 				'charts' => $charts,
+ 		);
+ 		return view('pages.goals')->with($data);
+     	//return view('pages.goals', ['charts' => $charts]);
     }
 
     /**
@@ -185,6 +191,66 @@ class GoalController extends Controller
     		$workout->percent = 0;
     		$workout->save();
     	}
+    	
+    	// Create Strength Goal Charts
+    	$goals = DB::table('strength_goals')->where('user_id', Auth::user()->id)->get();
+    	
+    	$charts = array();
+    	foreach ($goals as $goal) {
+    		$average = $goal->percent * 100;
+    		$chart = Charts::create('percentage', 'justgage')
+    		->title($goal->name)
+    		->elementLabel('Strength Goal')
+    		->values([$average,0,100])
+    		->responsive(false)
+    		->height(300)
+    		->width(0);
+    		array_push($charts, $chart);
+    	}
+    	
+    	// Create Endurance Goal Charts
+    	$goals = DB::table('endurance_goals')->where('user_id', Auth::user()->id)->get();
+    	foreach ($goals as $goal) {
+    		$average = $goal->percent * 100;
+    		$chart = Charts::create('percentage', 'justgage')
+    		->title($goal->name)
+    		->elementLabel('Endurance Goal')
+    		->values([$average,0,100])
+    		->responsive(false)
+    		->height(300)
+    		->width(0);
+    		array_push($charts, $chart);
+    	}
+    	
+    	// Create Balance Goal Charts
+    	$goals = DB::table('balance_goals')->where('user_id', Auth::user()->id)->get();
+    	foreach ($goals as $goal) {
+    		$average = $goal->percent * 100;
+    		$chart = Charts::create('percentage', 'justgage')
+    		->title($goal->name)
+    		->elementLabel('Balance Goal')
+    		->values([$average,0,100])
+    		->responsive(false)
+    		->height(300)
+    		->width(0);
+    		array_push($charts, $chart);
+    	}
+    	
+    	// Create Flexibility Goal Charts
+    	$goals = DB::table('flexibility_goals')->where('user_id', Auth::user()->id)->get();
+    	foreach ($goals as $goal) {
+    		$average = $goal->percent * 100;
+    		$chart = Charts::create('percentage', 'justgage')
+    		->title($goal->name)
+    		->elementLabel('Flexibility Goal')
+    		->values([$average,0,100])
+    		->responsive(false)
+    		->height(300)
+    		->width(0);
+    		array_push($charts, $chart);
+    	}
+    	
+    	return view('pages.goals', ['charts' => $charts]);
     }
 
     /**
