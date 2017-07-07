@@ -94,8 +94,6 @@
 				<!--Notes Tabs -->
 				<ul class="nav nav-tabs" id="tabContent">
 					<li class="active"><a href="#training" data-toggle="tab">Training</a></li>
-					<li><a href="#nutrition" data-toggle="tab">Nutrition</a></li>
-					<li><a href="#medical" data-toggle="tab">Medical</a><li>
 				</ul>
 				<div class="modal-body">
 					<div class="tab-content">
