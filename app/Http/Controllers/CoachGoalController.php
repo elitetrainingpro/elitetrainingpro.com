@@ -48,10 +48,10 @@ class CoachGoalController extends Controller
     			'email' => 'required',
     	));
     	
-    	$bio = DB::table('bios')->where('email', $request->email)->first();
-    	
+    	$athleteid = DB::table('bios')->where('email', $request->email)->first();
+    	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
     	// Create Strength Goal Charts
-    	$goals = DB::table('strength_goals')->where('user_id', $bio->user_id)->get();
+    	$goals = DB::table('strength_goals')->where('user_id', $athleteid->user_id)->get();
     	//print_r($goals);die();
     	$charts = array();
     	foreach ($goals as $goal) {
@@ -67,7 +67,7 @@ class CoachGoalController extends Controller
     	}
     	
     	// Create Endurance Goal Charts
-    	$goals = DB::table('endurance_goals')->where('user_id', $bio->user_id)->get();
+    	$goals = DB::table('endurance_goals')->where('user_id', $athleteid->user_id)->get();
     	foreach ($goals as $goal) {
     		$average = $goal->percent * 100;
     		$chart = Charts::create('percentage', 'justgage')
@@ -81,7 +81,7 @@ class CoachGoalController extends Controller
     	}
     	
     	// Create Balance Goal Charts
-    	$goals = DB::table('balance_goals')->where('user_id', $bio->user_id)->get();
+    	$goals = DB::table('balance_goals')->where('user_id', $athleteid->user_id)->get();
     	foreach ($goals as $goal) {
     		$average = $goal->percent * 100;
     		$chart = Charts::create('percentage', 'justgage')
@@ -95,7 +95,7 @@ class CoachGoalController extends Controller
     	}
     	
     	// Create Flexibility Goal Charts
-    	$goals = DB::table('flexibility_goals')->where('user_id', $bio->user_id)->get();
+    	$goals = DB::table('flexibility_goals')->where('user_id', $athleteid->user_id)->get();
     	foreach ($goals as $goal) {
     		$average = $goal->percent * 100;
     		$chart = Charts::create('percentage', 'justgage')
@@ -111,6 +111,7 @@ class CoachGoalController extends Controller
     	$athlete = DB::table('users')->where('email', $request->email)->first();
     	// data
     	$data = array(
+    			'bio' => $bio,
     			'athlete' => $athlete,
     			'charts' =>  $charts
     	);

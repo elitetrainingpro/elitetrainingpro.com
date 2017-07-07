@@ -17,7 +17,7 @@ class CoachCalendarController extends Controller
      */
     public function index()
     {
-        //
+    	//
     }
 
     /**
@@ -38,7 +38,8 @@ class CoachCalendarController extends Controller
      */
     public function store(Request $request)
     {
-    	$bio = DB::table('bios')->where('email', $request->email)->first();
+    	$bio= DB::table('bios')->where('email', Auth::user()->email)->first();
+    	$athlete = DB::table('users')->where('email', $request->email)->first();
     	
     	if ($request->has('submit_training_notes')) {
     		// validate the data
@@ -49,7 +50,7 @@ class CoachCalendarController extends Controller
     		));
     		//store in the Training Notes table
     		$note = new TrainingNote;
-    		$note->user_id = $bio->user_id;
+    		$note->user_id = $athlete->id;
     		$note->name= $request->name;
     		$note->notes = $request->notes;
     		$note->date = $request->date;
@@ -65,14 +66,15 @@ class CoachCalendarController extends Controller
     	$year = date('Y');
     	$month = date('m');
     	
-    	$strengths = DB::table('strength_workouts')->where('user_id', $bio->user_id)->get();
-    	$endurances = DB::table('endurance_workouts')->where('user_id', $bio->user_id)->get();
-    	$balances = DB::table('balance_workouts')->where('user_id', $bio->user_id)->get();
-    	$flexibilities = DB::table('flexibility_workouts')->where('user_id', $bio->user_id)->get();
-    	$notes = DB::table('training_notes')->where('user_id', $bio->user_id)->get();
+    	$strengths = DB::table('strength_workouts')->where('user_id', $athlete->id)->get();
+    	$endurances = DB::table('endurance_workouts')->where('user_id', $athlete->id)->get();
+    	$balances = DB::table('balance_workouts')->where('user_id', $athlete->id)->get();
+    	$flexibilities = DB::table('flexibility_workouts')->where('user_id', $athlete->id)->get();
+    	$notes = DB::table('training_notes')->where('user_id', $athlete->id)->get();
     	
     	$data = array(
     			'bio' => $bio,
+    			'athlete' => $athlete,
     			'endurances' => $endurances,
     			'balances' => $balances,
     			'flexibilities' => $flexibilities,

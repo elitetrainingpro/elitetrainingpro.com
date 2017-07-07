@@ -18,13 +18,20 @@ class FindTrainerController extends Controller
      */
     public function index()
     {
+    	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
     	$findTrainers = DB::table('bios')
     					->join('users', function ($findTrainers) {
     						$findTrainers->on('bios.user_id', '=', 'users.id')
     						->where('bios.identity', 'Coach');
     					})
     					->paginate(5);
-    	return view('pages.findTrainer')->with('findTrainers', $findTrainers);
+    					
+    					$data = array(
+    							'bio' => $bio,
+    							'findTrainers' => $findTrainers,
+    					);
+    					
+    	return view('pages.findTrainer')->with($data);
     }
 
     /**
@@ -144,7 +151,8 @@ class FindTrainerController extends Controller
     }
     
     public function search_code(Request $request)
-    {    	
+    {   
+    	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
     	$Search = $request->search_code;
     	$findTrainers = DB::table('users')
     	->join('bios', function ($findTrainers) use ($Search) {
@@ -152,6 +160,12 @@ class FindTrainerController extends Controller
     		->where('users.name', 'like', "%$Search%");
     	})
     	->paginate(5);
-    	return view('pages.findTrainer')->with('findTrainers', $findTrainers);
+    	$data = array(
+    			'bio' => $bio,
+    			'findTrainers' => $findTrainers,
+    	);
+    	
+    	return view('pages.findTrainer')->with($data);
+    	//return view('pages.findTrainer')->with('findTrainers', $findTrainers);
     }
 }

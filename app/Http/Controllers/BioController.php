@@ -29,7 +29,7 @@ class BioController extends Controller
      */
     public function create()
     {
-        return view('pages.bio');
+        //
     }
 
     /**
@@ -81,14 +81,14 @@ class BioController extends Controller
                     'bio' => $bio,
                     'athletes' => $athletes
                 );
-                return view('pages.home')->with($data);
+                return redirect('home')->with($data);
             } else {
                 $coaches = (object)array();
                 $data = array(
                     'bio' => $bio,
                     'coaches' => $coaches
                 );
-                return view('pages.athletes-home')->with($data);
+                return redirect('athletes-home')->with($data);
             }
         }else { // If identity is null then go to bio page (This should never ever happen)
             die('After If statement');

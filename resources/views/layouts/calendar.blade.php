@@ -21,7 +21,6 @@
 @section('navlinks')
     <li><a class="active" href="athletecalendar"><i class="fa fa-map fa"></i>Calendar</a></li>
 	<li><a href="goals"><i class="fa fa-home fa"></i>Goals</a></li>
-    <li><a href="schedule"><i class="fa fa-map fa"></i>Schedule</a></li>
 @endsection
 
 @section('content')
@@ -95,8 +94,6 @@
 				<!--Notes Tabs -->
 				<ul class="nav nav-tabs" id="tabContent">
 					<li class="active"><a href="#training" data-toggle="tab">Training</a></li>
-					<li><a href="#nutrition" data-toggle="tab">Nutrition</a></li>
-					<li><a href="#medical" data-toggle="tab">Medical</a><li>
 				</ul>
 				<div class="modal-body">
 					<div class="tab-content">
@@ -141,7 +138,6 @@ $(document).ready(function() {
         },
         navLinks: true,
         displayEventTime: false,
-        
         editable: false,
         selectable: true,
         selectHelper: true,
