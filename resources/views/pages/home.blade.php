@@ -8,9 +8,7 @@
 @endsection
 
 @section('navlinks')
-	<li><a href="athletes"><i class="fa fa-home fa"></i>Athletes</a></li>
-    <li><a href="coachcalendar"><i class="fa fa-map fa"></i>Calendar</a></li>
-    <li><a href="notifications"><i class="fa fa-bolt fa"></i>Notifications</a></li>
+	<li><a href="home"><i class="fa fa-home fa"></i>Athletes</a></li>
 @endsection
 
 @section('content')
@@ -47,15 +45,16 @@
 			</div>
 			<div id="athlete">
 				@if(count($athletes)>=1)
-					<h3>Your Athletes</h3>
+					<h3>Your Athletes:</h3>
 					
 					<?php $index = sizeof($athletes)-count($athletes); ?>
 					@foreach($athletes as $athlete)
+						<div class="col-md-6">
 						<div id="Profile">
 			    			<div id="Lefts">
 			      				<div id="Photo"> <img src="{{ URL::asset('assets/avatars/uploads/' . $athlete[$index]->image) }}" alt="No image found" height="80px" width="80px"> </div><br/>
 			      				<!-- Have to index +1 because merged two together -->
-			      				<div>{{ $athlete[$index+1]->name }}</div>
+			      				<div><strong>{{ $athlete[$index+1]->name }}</strong></div>
 			   				 </div>
 
 			   				 <div id="Infos">
@@ -69,6 +68,7 @@
 							    {!! Form::close() !!}
 							</div>
 							<div style="clear:both"></div>
+						</div>
 						</div>
 					@endforeach
 				@endif

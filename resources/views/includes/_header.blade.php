@@ -11,7 +11,7 @@
 						{{ Auth::user()->name }}
 						@endif
 						<div class="dropdown">
-							<img class="dropdown-toggle" type="button" data-toggle="dropdown" src="{{ URL::asset('assets/avatars/default-user.png') }}" alt="No image found" height="40px" width="40px">
+							<img class="dropdown-toggle" type="button" data-toggle="dropdown" src="{{ URL::asset('assets/avatars/uploads/' . $bio->image ) }}" alt="No image found" height="40px" width="40px" style="border-radius:50%">
 							<ul class="dropdown-menu">
 								@yield('navlinks')
 								<li>

@@ -18,9 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('athletes-home', 'HomeController@index')->name('home');;
 Route::get('athletes', 'PagesController@getAthletes');
 Route::get('notifications', 'PagesController@getNotifications');
-Route::get('schedule', 'PagesController@getSchedules');
 Route::get('athletecalendar', 'CalendarController@index');
 Route::post('search_code', 'FindTrainerController@search_code');
 Route::resource('goals', 'GoalController');

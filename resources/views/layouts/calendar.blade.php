@@ -21,7 +21,6 @@
 @section('navlinks')
     <li><a class="active" href="athletecalendar"><i class="fa fa-map fa"></i>Calendar</a></li>
 	<li><a href="goals"><i class="fa fa-home fa"></i>Goals</a></li>
-    <li><a href="schedule"><i class="fa fa-map fa"></i>Schedule</a></li>
 @endsection
 
 @section('content')
@@ -141,7 +140,6 @@ $(document).ready(function() {
         },
         navLinks: true,
         displayEventTime: false,
-        
         editable: false,
         selectable: true,
         selectHelper: true,

@@ -10,35 +10,34 @@
 @section('navlinks')
     <li><a href="athletecalendar"><i class="fa fa-map fa"></i>Calendar</a></li>
 	<li><a href="goals"><i class="fa fa-home fa"></i>Goals</a></li>
-    <li><a href="schedule"><i class="fa fa-map fa"></i>Schedule</a></li>
 @endsection
 
 @section('content')
 <div class="container">
 	<div class="row">
-		<div class="col-sm-12">
+		<div class="col-sm-12 text-center">
 			<form action="search_code" method="post">
-			<input type="text" name="search_code" placeholder="Search...">
+			<input type="text" name="search_code" placeholder="Search for a Trainer...">
 			<input type="hidden" name="_token" value="{{{ csrf_token() }}}">
-			<input type="submit" name="Submit" value="search">
+			<input type="submit" name="Submit" value="search" id="searchsubmit">
 			</form><br><br>
 		</div>
 	</div>
 	<div class="row">
-	<div class="col-md-8">	
 	@foreach($findTrainers as $findTrainer)
+	<div class="col-md-6">
 	<div class="panel panel-default">
     <div class="panel-heading"><h3><img src="{{ URL::asset('assets/avatars/uploads/' . $findTrainer->image) }}" alt="No image found" height="75px" width="75px" style="border-radius:50%"> {{ $findTrainer->name }} 
-    
+    <span style="float: right" >
     {!! Form::open(['route' => 'findtrainer.store', 'data-parsley-validate' => '', 'files' => true]) !!}
     	{{ Form::hidden('email',  $findTrainer->email) }}
-    	{{ Form::submit('+ Add', ['class' => 'btn btn-primary']) }}
-    {!! Form::close() !!}
+    	{{ Form::submit('+', ['class' => 'btn btn-primary btn-radius']) }}
+    {!! Form::close() !!}</span>
     </h3></div>
-    <div class="panel-body">{{ $findTrainer->city }}, {{ $findTrainer->state }} {{ $findTrainer->email }} <br> {{ substr(strip_tags($findTrainer->bio),0, 300) }}{{ strlen(strip_tags($findTrainer->bio)) > 150 ? "..." : ""}}</div>
+    <div class="panel-body">{{ $findTrainer->city }}, {{ $findTrainer->state }} <br> {{ $findTrainer->email }} <br> {{ substr(strip_tags($findTrainer->bio),0, 300) }}{{ strlen(strip_tags($findTrainer->bio)) > 150 ? "..." : ""}}</div>
+  </div>
   </div>
 	@endforeach
-	</div>
 	</div>
 	<?php echo $findTrainers->render(); ?>
 </div>

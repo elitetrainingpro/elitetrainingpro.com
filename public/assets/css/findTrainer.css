@@ -1,5 +1,5 @@
 input[type=text] {
-    width: 130px;
+    width: 50%;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
@@ -12,7 +12,10 @@ input[type=text] {
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
 }
-
-input[type=text]:focus {
-    width: 100%;
+#searchsubmit
+{    
+        visibility: hidden;
+}
+.btn-radius {
+	border-radius:50%;
 }

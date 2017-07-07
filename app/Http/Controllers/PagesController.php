@@ -36,9 +36,4 @@ class PagesController extends Controller
 		$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
 		return view('pages.goals')->with('bio', $bio);
 	}
-	
-	public function getSchedules() {
-		$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
-		return view('pages.schedule')->with('bio', $bio);
-	}
 }
