@@ -9,11 +9,6 @@
 	.nav {
 		margin-right: 0px;
 	}
-	#calendar {
-		width: 70%;
-		margin: auto;
-		padding: 40px 0px;
-	}
 	</style>
 @endsection
 
