@@ -12,17 +12,17 @@
 */
 
 Route::get('/', function () {
+	if(Auth::check()){return Redirect::to('home');}
     return view('auth.login');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('athletes-home', 'HomeController@index')->name('home');;
-Route::get('athletes', 'PagesController@getAthletes');
-Route::get('notifications', 'PagesController@getNotifications');
+Route::get('athletes-home', 'HomeController@index')->name('home');
 Route::get('athletecalendar', 'CalendarController@index');
 Route::post('search_code', 'FindTrainerController@search_code');
+Route::resource('athletes-home', 'HomeController');
 Route::resource('goals', 'GoalController');
 Route::resource('findtrainer', 'FindTrainerController');
 Route::resource('athletecalendar', 'CalendarController');
