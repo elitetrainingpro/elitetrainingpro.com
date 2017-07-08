@@ -20,12 +20,14 @@ class BioController extends Controller
     public function index()
     {
     	if(!Auth::check()){
-    		print_r("asdfsaf");
     		return redirect('login');
     	}
     	
     	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
     	
+    	if ($bio == null) {
+    		return view('pages.bio');
+    	}
     	if ($bio->identity == 'Coach') {
     		// get list of athletes that the coach has.
     		$athleteToCoaches = DB::table('athlete_to_coaches')->where('coach_id', $bio->user_id)->get();
