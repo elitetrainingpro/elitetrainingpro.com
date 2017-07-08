@@ -21,6 +21,11 @@ class CalendarController extends Controller
      */
     public function index()
     {
+    	if(!Auth::check()){
+    		print_r("asdfsaf");
+    		return redirect('login');
+    	}
+    	
     	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
     	
     	if ($bio->identity == 'Coach') {

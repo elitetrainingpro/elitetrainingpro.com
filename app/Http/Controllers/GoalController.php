@@ -23,9 +23,11 @@ class GoalController extends Controller
      */
     public function index()
     {
-    	if (!Auth::user()->email){
-    		print_r("asdf");die();
+    	if(!Auth::check()){
+    		print_r("asdfsaf");
+    		return redirect('login');
     	}
+    	
     	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
     	
     	if ($bio->identity == 'Coach') {
