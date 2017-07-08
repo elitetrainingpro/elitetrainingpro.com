@@ -1,11 +1,30 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-.grad {
-	background: #4D4D4D; /* For browsers that do not support gradients */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+	padding-top: 15px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background: #4D4D4D; /* For browsers that do not support gradients */
 	background: -webkit-linear-gradient(#4D4D4D, #A1A1A1); /* For Safari 5.1 to 6.0 */
 	background: -o-linear-gradient(#4D4D4D, #A1A1A1); /* For Opera 11.1 to 12.0 */
 	background: -moz-linear-gradient(#4D4D4D, #A1A1A1); /* For Firefox 3.6 to 15 */
 	background: linear-gradient(#4D4D4D, #A1A1A1); /* Standard syntax */
-
+}
+#calendar {
+	width: 70%;
+	margin: auto;
+	padding: 40px 0px;
 }
 .icon-link {
 	color: white;
@@ -59,14 +78,6 @@
 	background-image: none;
 	border: 1px solid transparent;
 	border-raduis: 4px;
-}
-
-.footer-position {
-	position: relative;
-	right: 0;
-  	bottom: 0;
-  	left: 0;
-	border: 1px solid transparent;
 }
 
 .text-copyright {
