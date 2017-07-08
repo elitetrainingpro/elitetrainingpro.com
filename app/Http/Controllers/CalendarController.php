@@ -91,6 +91,9 @@ class CalendarController extends Controller
     				if ($goal->percent < 1.00) {
 		    			$volGoal = $goal->weight * $goal->reps * $goal->sets;
 		    			$average = $newVol / $volGoal;
+		    			if ($average > 1)
+		    				$average = 1;
+		    			
 		    			if ($goal->percent < $average) {
 		    				$data = array(
 		    						'user_id' => Auth::user()->id,
@@ -123,15 +126,19 @@ class CalendarController extends Controller
     		$workout->save();
     		
     		// Calculate the percentage of the percentage
-    		$mph = $workout->distance/($workout->event_time/60);
+    		$mph = ((($workout->event_time)*60)/$workout->distance)/60;
     		$volGoal= 0;
     		$goals = DB::table('endurance_goals')->where('user_id', Auth::user()->id)->get();
     		foreach ($goals as $goal) {
     			// only do if names match each other
     			if ($goal->name == $workout->name) {
     				if ($goal->percent < 1.00) {
-    					$mphGoal = $goal->distance/($goal->event_time/60);
-    					$average = $mph/ $mphGoal;
+    					//print_r((($goal->event_time*60)/$goal->distance)/60);print_r(" : ");print_r($goal->distance);die();
+    					$mphGoal = (($goal->event_time*60)/$goal->distance)/60;
+    					$average = $mph/ $mphGoal;//print_r($average);die();
+    					if ($average > 1)
+    						$average = 1;
+    					
     					if ($goal->percent < $average) {
     						$data = array(
     								'user_id' => Auth::user()->id,
@@ -172,6 +179,9 @@ class CalendarController extends Controller
     				if ($goal->percent < 1.00) {
     					$volGoal = $goal->sets/($goal->time/60);
     					$average = $newVol / $volGoal;
+    					if ($average > 1)
+    						$average = 1;
+    					
     					if ($goal->percent < $average) {
     						$data = array(
     								'user_id' => Auth::user()->id,
@@ -213,6 +223,9 @@ class CalendarController extends Controller
     				if ($goal->percent < 1.00) {
     					$volGoal = $goal->sets/($goal->time/60);
     					$average = $newVol / $volGoal;
+    					if ($average > 1)
+    						$average = 1;
+    					
     					if ($goal->percent < $average) {
     						$data = array(
     								'user_id' => Auth::user()->id,
