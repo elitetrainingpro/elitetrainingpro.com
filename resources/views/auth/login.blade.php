@@ -109,22 +109,22 @@
 						</div>
 					</div>
 
-					<div class="form-group">
-						<div class="col-md-6 col-md-offset-4">
-							<div class="checkbox">
-								<label> <input type="checkbox" name="remember"{{ old('remember') ? 'checked' : '' }}>
-									Remember Me
-								</label>
-							</div>
-						</div>
-					</div>
+<!-- 					<div class="form-group"> -->
+<!-- 						<div class="col-md-6 col-md-offset-4"> -->
+<!-- 							<div class="checkbox"> -->
+<!-- 								<label> <input type="checkbox" name="remember"{{ old('remember') ? 'checked' : '' }}> -->
+<!-- 									Remember Me -->
+<!-- 								</label> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 
 					<div class="form-group">
 						<div class="col-md-8 col-md-offset-4">
 							<button type="submit" class="btn btn-primary">Login</button>
-
-							<a class="btn btn-link" href="{{ route('password.request') }}">
-								Forgot Your Password? </a>
+<!-- 							<a class="btn btn-link" href="{{ route('password.request') }}"> -->
+<!-- 								Forgot Your Password? </a> -->
+								<a class="btn btn-link" id="member">Not a member?</a>
 						</div>
 					</div>
 				</form>
@@ -193,6 +193,7 @@
 					<div class="form-group">
 						<div class="col-md-6 col-md-offset-4">
 							<button type="submit" class="btn btn-primary">Register</button>
+							<a class="btn btn-link" id="already">Already a member?</a>
 						</div>
 					</div>
 				</form>
@@ -247,7 +248,7 @@
       </p>
     </div>
     <div class="col-sm-4">
-      	<img src="{{ URL::asset('assets/images/elitetrainingpro.png') }}" alt="No image found" height="300px" width="300px">
+      	<img src="{{ URL::asset('assets/images/etp.png') }}" alt="No image found" height="300px" width="300px">
     </div>
   </div>
 </div>
@@ -255,7 +256,7 @@
 <div class="container-fluid bg-grey">
   <div class="row">
     <div class="col-sm-4">
-      	<img src="{{ URL::asset('assets/images/Our-Values.png') }}" alt="No image found" height="300px" width="300px">
+      	<img src="{{ URL::asset('assets/images/values.png') }}" alt="No image found" height="300px" width="300px">
     </div>
     <div class="col-sm-8">
       <h2>Our Values</h2>
@@ -469,6 +470,15 @@
 <!-- </div> -->
 
 <script>
+$(document).ready(function(){
+    $("#member").click(function(){
+        $("#create").modal();
+        $('#login').modal('toggle');
+    });$("#already").click(function(){
+        $("#login").modal();
+        $("#create").modal('toggle');
+    });
+});
 $(document).ready(function(){
   // Add smooth scrolling to all links in navbar + footer link
   $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
