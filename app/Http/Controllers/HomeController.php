@@ -27,9 +27,9 @@ class HomeController extends Controller
     {
     	$bio = DB::table('bios')->where('email', Auth::user()->email)->first();
 
-
+		
         if ($bio->identity != NULL) {
-            if ($bio->identity == 'Coach'){
+            if ($bio->identity == 'Coach') {
 
                 // get list of athletes that the coach has.
                 $athleteToCoaches = DB::table('athlete_to_coaches')->where('coach_id', $bio->user_id)->get();
