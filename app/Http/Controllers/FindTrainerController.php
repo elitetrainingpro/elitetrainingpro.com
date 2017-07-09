@@ -72,7 +72,7 @@ class FindTrainerController extends Controller
     		$workout = new AthleteToCoach;
     		$workout->athlete_id = Auth::user()->id;
     		$workout->coach_id = $coachId->id;
-    		$workout->still_connected = 1;
+    		$workout->still_connected = 0;
     		$workout->save();
     	}
 

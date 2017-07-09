@@ -22,6 +22,7 @@ Route::get('athletes-home', 'HomeController@index')->name('home');;
 Route::get('athletes', 'PagesController@getAthletes');
 Route::get('notifications', 'PagesController@getNotifications');
 Route::get('athletecalendar', 'CalendarController@index');
+Route::post('connectRequest', 'HomeController@connectRequest');
 Route::post('search_code', 'FindTrainerController@search_code');
 Route::resource('goals', 'GoalController');
 Route::resource('findtrainer', 'FindTrainerController');
