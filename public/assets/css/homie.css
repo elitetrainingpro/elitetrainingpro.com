@@ -3,6 +3,14 @@ body {
       line-height: 1.8;
       color: #818181;
   }
+  a {
+		color: white;
+		text-decoration: none;
+	}
+	a:hover {
+	color: white;
+		text-decoration: none;
+	}
   h2 {
       font-size: 24px;
       text-transform: uppercase;
@@ -108,7 +116,6 @@ body {
   .navbar {
       margin-bottom: 0;
       background-color: #4D4D4D;
-      z-index: 9999;
       border: 0;
       font-size: 12px !important;
       line-height: 1.42857143 !important;
@@ -175,25 +182,13 @@ body {
         font-size: 150px;
     }
   }
-  
 
-.footer-position {
-	position: relative;
-	border: 1px solid transparent;
-}
 .text-copyright {
 	color: white;
 	text-decoration: none;
 	font-size:18px;
 	font-family:GARAMOND;
 	margin: auto;
-}
-.grad {
-	background: #4D4D4D; /* For browsers that do not support gradients */
-	background: -webkit-linear-gradient(#4D4D4D, #A1A1A1); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(#4D4D4D, #A1A1A1); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(#4D4D4D, #A1A1A1); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(#4D4D4D, #A1A1A1); /* Standard syntax */
 }
 .navbar-brand2 {
     padding: 14px 15px;

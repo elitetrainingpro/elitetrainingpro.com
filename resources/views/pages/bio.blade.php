@@ -24,11 +24,8 @@
 	    <div class="container">
 	        <div class="navbar-header">
 	            <!-- Branding Image -->
-	            <div class="icon-style"><img src="{{ URL::asset('assets/images/elitetrainingpro.png') }}" alt="No image found" height="45px" width="45px">
-	            	<a class="navbar-brand2">
-	               		{{ config('app.name', 'Elite Training Pro') }}
-	            	</a>
-	            </div>
+					<h4 class="icon-style"><img src="{{ URL::asset('assets/images/etp.png') }}" alt="No image found" height="45px" width="45px">
+					<a class="icon-link" href="home">Elite Training Pro</a></h4>
 	        </div>
 	    </div>
 	</nav>

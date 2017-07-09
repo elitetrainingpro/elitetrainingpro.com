@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="col-sm-6 icon">
-					<h4 class="icon-style"><img src="{{ URL::asset('assets/images/elitetrainingpro.png') }}" alt="No image found" height="45px" width="45px">
+					<h4 class="icon-style"><img src="{{ URL::asset('assets/images/etp.png') }}" alt="No image found" height="45px" width="45px">
 					<a class="icon-link" href="home">Elite Training Pro</a></h4>
 				</div>
 				<div class="col-sm-6 nav">
