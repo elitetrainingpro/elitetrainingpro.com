@@ -63,6 +63,11 @@
 							<div id="Photo"> <img src="{{ URL::asset('assets/avatars/uploads/' . $coach[$index]->image) }}" alt="No image found" height="80px" width="80px"> </div><br/>
 	
 							<div><strong>{{ $coach[$index+1]->name }}</strong></div>
+
+						<!-- 	<form action="connectRequest" method="post">
+									<input type="hidden" name="email" value="{{ $coach[$index]->email }}"> {!! csrf_field() !!}
+									<button type="submit" name="Deny" value="deny" id="deny_submit" class="btn btn-danger"> Remove Coach</button>
+								</form> -->
 						</div>
 	
 						<div id="Infos">

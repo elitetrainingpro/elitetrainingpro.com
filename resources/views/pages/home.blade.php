@@ -45,32 +45,46 @@
 			</div>
 			<div id="athlete">
 				@if(count($athletes)>=1)
-					<h3>Your Athletes:</h3>
-					
-					<?php $index = sizeof($athletes)-count($athletes); ?>
-					@foreach($athletes as $athlete)
-						<div class="col-md-6">
-						<div id="Profile">
-			    			<div id="Lefts">
-			      				<div id="Photo"> <img src="{{ URL::asset('assets/avatars/uploads/' . $athlete[$index]->image) }}" alt="No image found" height="80px" width="80px"> </div><br/>
-			      				<!-- Have to index +1 because merged two together -->
-			      				<div><strong>{{ $athlete[$index+1]->name }}</strong></div>
-			   				 </div>
+				<h3>Your Athletes:</h3>
 
-			   				 <div id="Infos">
-								<!-- Have to index by the size of the array and offset by the count -->
-								<p><span> {{ $athlete[$index]->email }} </span></p>
-								<p><span> {{ $athlete[$index]->city }}, {{ $athlete[$index]->state }} </span></p>
-								<p> <span> {{ substr(strip_tags($athlete[$index]->bio),0, 300) }}{{ strlen(strip_tags($bio->bio)) > 150 ? "..." : "" }} </span></p>
-								{!! Form::open(['route' => 'coachcalendar.store', 'data-parsley-validate' => '', 'files' => true]) !!}
-							    	{{ Form::hidden('email',  $athlete[$index]->email) }}
-							    	{{ Form::submit('View Athlete', ['class' => 'btn btn-primary']) }}
-							    {!! Form::close() !!}
-							</div>
-							<div style="clear:both"></div>
+				<?php $index = sizeof($athletes)-count($athletes); ?>
+				@foreach($athletes as $athlete)
+				<div class="col-md-6">
+					<div id="Profile">
+						<div id="Lefts">
+							<div id="Photo"> <img src="{{ URL::asset('assets/avatars/uploads/' . $athlete[$index]->image) }}" alt="No image found" height="80px" width="80px"> </div><br/>
+							<!-- Have to index +1 because merged two together -->
+							<div><strong>{{ $athlete[$index]->name }}</strong></div>
+
+							{!! Form::open(['route' => 'coachcalendar.store', 'data-parsley-validate' => '', 'files' => true]) !!}
+							{{ Form::hidden('email',  $athlete[$index]->email) }}
+							{{ Form::submit('View Athlete', ['class' => 'btn btn-primary']) }}
+							{!! Form::close() !!}
 						</div>
+
+						<div id="Infos">
+							<!-- Have to index by the size of the array and offset by the count -->
+							<p><span> {{ $athlete[$index]->email }} </span></p>
+							<p><span> {{ $athlete[$index]->city }}, {{ $athlete[$index]->state }} </span></p>
+							<p> <span> {{ substr(strip_tags($athlete[$index]->bio),0, 300) }}{{ strlen(strip_tags($bio->bio)) > 150 ? "..." : "" }} </span></p>
+
+							@if($athlete[$index]->still_connected == 0)
+								<form action="connectRequest" method="post">
+									<input type="hidden" name="email" value="{{ $athlete[$index]->email }}"> {!! csrf_field() !!}
+									<button type="submit" name="accept_submit" value="accept_submit" id="accept_submit" class="btn btn-success">Accept Athlete</button>
+								</form> 
+							@endif
+
+								<form action="connectRequest" method="post">
+									<input type="hidden" name="email" value="{{ $athlete[$index]->email }}"> {!! csrf_field() !!}
+									<button type="submit" name="Deny" value="deny" id="deny_submit" class="btn btn-danger"> Deny Athlete</button>
+								</form>
+
 						</div>
-					@endforeach
+						<div style="clear:both"></div>
+					</div>
+				</div>
+				@endforeach
 				@endif
 			</div>
 		</div>
