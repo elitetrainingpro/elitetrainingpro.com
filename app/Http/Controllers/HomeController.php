@@ -44,13 +44,12 @@ class HomeController extends Controller
                 foreach ($athleteToCoaches as $athleteToCoach){
                     $athlete = DB::table('users')
                     ->join('bios', 'bios.user_id', '=', 'users.id')
-                    ->join('athlete_to_coaches', 'athlete_to_coaches.athlete_id', '=', 'users.id')
+                    ->join('athlete_to_coaches', 'athlete_to_coaches.athlete_id', '=', 'users.id')->where('athlete_to_coaches.coach_id', $athleteToCoach->coach_id)
                     ->where('users.id', $athleteToCoach->athlete_id)->get();
 
                     array_push($athletes, $athlete); 
                 }
 
-                // data
                 $data = array(
                     'bio' => $bio,
                     'athletes' => $athletes
@@ -115,8 +114,7 @@ class HomeController extends Controller
             ->update(['still_connected' => 1]);
 
             return redirect()->back();
-        } else {        // Deleting connection if denied 
-
+        } else {        // Deleting connection
             if ($bio->identity != NULL) {
                 if ($bio->identity == 'Coach') {   // DELETING ATHLETE FOR COACH
                  // Getting Athlete Id
@@ -131,8 +129,8 @@ class HomeController extends Controller
                     }
 
                     return redirect()->back();
-                }   else {                          // DELETING COACH FOR ATHLETE
-                // Getting Coach Id
+                }   else {                  // DELETING COACH FOR ATHLETE
+     
                     $coachId = DB::table('users')->where('email', $request->email)->first();
 
                     $athlete2Coach = DB::table('athlete_to_coaches')->where([['athlete_id', $bio->user_id], ['coach_id', $coachId->id]])->first();
