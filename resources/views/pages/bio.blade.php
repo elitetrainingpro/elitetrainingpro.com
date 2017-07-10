@@ -113,7 +113,7 @@
 				    'Identity' => [
 				    				null => 'Please Select',
 									'Athlete' => 'Athlete',
-									'Coach' => 'Coach',
+									'Coach' => 'Trainer',
 								],
 				], null, ['required']) }}
 				<br/><br/>
