@@ -43,12 +43,12 @@
 			    <!-- Elements inside ProfilePage have floats -->
 			    <div style="clear:both"></div>
 			</div>
+
 			<div id="athlete">
 				@if(count($athletes)>=1)
-				<h3>Your Athletes:</h3>
-
+				<h3>Your Athlete(s):</h3>
 				<?php $index = sizeof($athletes)-count($athletes); ?>
-				@foreach($athletes as $athlete)
+				@foreach(array_reverse($athletes) as $athlete)
 				<div class="col-md-6">
 					<div id="Profile">
 						<div id="Lefts">
@@ -69,13 +69,13 @@
 							<p> <span> {{ substr(strip_tags($athlete[$index]->bio),0, 300) }}{{ strlen(strip_tags($bio->bio)) > 150 ? "..." : "" }} </span></p>
 
 							@if($athlete[$index]->still_connected == 0)
-								<form action="connectRequest" method="post">
+								<form style="display:inline-block" action="connectRequest" method="post">
 									<input type="hidden" name="email" value="{{ $athlete[$index]->email }}"> {!! csrf_field() !!}
 									<button type="submit" name="accept_submit" value="accept_submit" id="accept_submit" class="btn btn-success">Accept Athlete</button>
 								</form> 
 							@endif
 
-								<form action="connectRequest" method="post">
+								<form style="display:inline-block" action="connectRequest" method="post">
 									<input type="hidden" name="email" value="{{ $athlete[$index]->email }}"> {!! csrf_field() !!}
 									<button type="submit" name="Deny" value="deny" id="deny_submit" class="btn btn-danger"> Deny Athlete</button>
 								</form>

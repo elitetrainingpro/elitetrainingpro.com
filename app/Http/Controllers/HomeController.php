@@ -40,23 +40,15 @@ class HomeController extends Controller
                 //declare an array to sotre athlete's bio information
                 $athletes = array();
 
-                // Get all the athlete's bio information and Athlete's Name
+                // Get all the athlete's bio information and Athlete's Name, connected status
                 foreach ($athleteToCoaches as $athleteToCoach){
-
-                    //print_r($athleteToCoach->athlete_id);
-                 //   die();
-
                     $athlete = DB::table('users')
                     ->join('bios', 'bios.user_id', '=', 'users.id')
                     ->join('athlete_to_coaches', 'athlete_to_coaches.athlete_id', '=', 'users.id')
                     ->where('users.id', $athleteToCoach->athlete_id)->get();
 
-
                     array_push($athletes, $athlete); 
                 }
-                    
-                 //   die();
-
 
                 // data
                 $data = array(
@@ -99,49 +91,61 @@ class HomeController extends Controller
         
         // validate the data
         $this->validate($request, array(
-                'email' => 'required',
-        ));
+            'email' => 'required',
+            ));
 
-        // Get current sure login info.
+        // Get current user's login info
         $bio = DB::table('bios')->where('email', Auth::user()->email)->first();
 
-        // When accept Accept Athlete will change to View Athlete
+        // Accepting the athlete
         if($request->has('accept_submit')) 
         {
             // Athlete Id
             $athleteId = DB::table('users')->where('email', $request->email)->first();
 
+            // gets both Athlete and Coach
             $data = array(
                 'athlete_id' => $athleteId->id,
                 'coach_id'=> $bio->id
                 );
 
+            // Updates the Still connected only where Athlete and Coach
             $connected = DB::table('athlete_to_coaches')
-                            ->where($data)
-
-                            ->update(['still_connected' => 1]);
-               print_r($connected);
-            die();
-             return redirect()->back();
-
-
-        } else {        // Deleting connection if denied
-            // Getting Athlete Id
-            $athleteId = DB::table('users')->where('email', $request->email)->first();
-
-            // check for match
-            $athlete2Coach = DB::table('athlete_to_coaches')->where([['coach_id', $bio->user_id], ['athlete_id', $athleteId->id]])->first();
-
-            // if coach and athlete are not matched together then update still_connected and Delete Connection
-            if ($athlete2Coach)
-            {
-                AthleteToCoach::where([['coach_id', $bio->user_id], ['athlete_id', $athleteId->id]])->delete();
-            }
+            ->where($data)
+            ->update(['still_connected' => 1]);
 
             return redirect()->back();
+        } else {        // Deleting connection if denied 
 
+            if ($bio->identity != NULL) {
+                if ($bio->identity == 'Coach') {   // DELETING ATHLETE FOR COACH
+                 // Getting Athlete Id
+                    $athleteId = DB::table('users')->where('email', $request->email)->first();
+
+                // check for match
+                    $athlete2Coach = DB::table('athlete_to_coaches')->where([['coach_id', $bio->user_id], ['athlete_id', $athleteId->id]])->first();
+
+                // if coach and athlete are matched together then update still_connected and Delete Connection
+                    if ($athlete2Coach){
+                        AthleteToCoach::where([['coach_id', $bio->user_id], ['athlete_id', $athleteId->id]])->delete();
+                    }
+
+                    return redirect()->back();
+                }   else {                          // DELETING COACH FOR ATHLETE
+                // Getting Coach Id
+                    $coachId = DB::table('users')->where('email', $request->email)->first();
+
+                    $athlete2Coach = DB::table('athlete_to_coaches')->where([['athlete_id', $bio->user_id], ['coach_id', $coachId->id]])->first();
+
+                    if ($athlete2Coach){
+                      AthleteToCoach::where([['athlete_id', $bio->user_id], ['coach_id', $coachId->id]])->delete();
+                    }
+                    return redirect()->back();
+                }
+
+            } else{
+                return view('pages.athletes-home')->with('bio', $bio);
+            }
         }
-        return view('pages.athletes-home')->with('bio', $bio);
-
     }
 }
