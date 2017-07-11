@@ -55,25 +55,29 @@
 					<h3>Your Trainer(s):</h3>
 					
 					@foreach($coaches as $coach)
-					<div class="col-sm-6">
+					<div class="col-md-5 col-md-offset-1" id="Profile">
 						<?php $index = sizeof($coaches)-count($coaches); ?>
-						
-						<div id="Profile">
-							<div id="Lefts">
-								<div><h4><strong>{{ $coach[$index+1]->name }}</strong></h4></div><br/>
-
-								<div id="Photo"> <img src="{{ URL::asset('assets/avatars/uploads/' . $coach[$index]->image) }}" alt="No image found" height="80px" width="80px"> </div><br/>
+							<div class="row">
+								<div class="col-md-6">
+									<h4><strong>{{ $coach[$index+1]->name }}</strong></h4>
+								</div>
+								<div class="col-md-6">
+									<p><form action="connectRequest" method="post">
+										<input type="hidden" name="email" value="{{ $coach[$index]->email }}"> {!! csrf_field() !!}
+										<button type="submit" name="Deny" value="deny" id="deny_submit" class="btn btn-danger">Remove</button>
+									</form></p>
+								</div>
 							</div>
-		
-							<div id="Infos">
-								<p><form action="connectRequest" method="post">
-									<input type="hidden" name="email" value="{{ $coach[$index]->email }}"> {!! csrf_field() !!}
-									<button type="submit" name="Deny" value="deny" id="deny_submit" class="btn btn-danger">Remove</button>
-								</form></p>
-				
-								<p><span> {{ $coach[$index]->email }} </span></p>
-								<p><span> {{ $coach[$index]->city }}, {{ $coach[$index]->state }} </span></p>
-								<p> <span> {{ substr(strip_tags($coach[$index]->bio),0, 300) }}{{ strlen(strip_tags($bio->bio)) > 150 ? "..." : "" }} </span></p>
+							<div class="row">
+								<div class="col-md-5">
+									<img src="{{ URL::asset('assets/avatars/uploads/' . $coach[$index]->image) }}" alt="No image found" height="80px" width="80px">
+								</div>
+								<div class="col-md-5">
+									<p><b>Email:</b><br><span> {{ $coach[$index]->email }} </span></p>
+									<p><b>Location:</b><br><span> {{ $coach[$index]->city }}, {{ $coach[$index]->state }} </span></p>
+									<p><b>Bio:</b><br> 
+									{{ substr(strip_tags($coach[$index]->bio),0, 50) }}{{ strlen(strip_tags($bio->bio)) > 50 ? '...' : ""}} </p>
+								</div>
 							</div>
 							<div style="clear:both"></div>
 						</div>

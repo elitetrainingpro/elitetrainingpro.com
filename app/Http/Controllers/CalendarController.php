@@ -111,8 +111,6 @@ class CalendarController extends Controller
     		$workout->save();
     		
     		// Calculate the percentage of the percentage
-    		$newVol = $workout->weight * $workout->reps * $workout->sets;
-    		$volGoal= 0;
     		$goals = DB::table('strength_goals')->where('user_id', Auth::user()->id)->get();
     		
     		// check to see if current goal percent database is < than the new percent
@@ -159,18 +157,33 @@ class CalendarController extends Controller
     		// Calculate the percentage of the percentage
     		$mph = ((($workout->event_time)*60)/$workout->distance)/60;
     		$volGoal= 0;
+    		
     		$goals = DB::table('endurance_goals')->where('user_id', Auth::user()->id)->get();
     		foreach ($goals as $goal) {
     			// only do if names match each other
     			if ($goal->name == $workout->name) {
     				if ($goal->percent < 1.00) {
-    					//print_r((($goal->event_time*60)/$goal->distance)/60);print_r(" : ");print_r($goal->distance);die();
-    					$mphGoal = (($goal->event_time*60)/$goal->distance)/60;
-    					$average = $mph/ $mphGoal;//print_r($average);die();
-    					if ($average > 1)
-    						$average = 1;
+    					$percent = 0;
+    					$percent1 = 0;
+    					$percent2 = 0;
+    					if ($workout->distance >= $goal->distance) {
+    						$percent1 += 1;
+    					}
+    					else {
+    						$percent1 += $workout->distance / $goal->distance;
+    					}
+    					if ($workout->event_time >= $goal->event_time) {
+    						$percent2 += 1;
+    					}
+    					else {
+    						$percent2 += $workout->event_time / $goal->event_time;
+    					}
+    					$percent = $percent1 + $percent2;
+    					$final = $percent / 2;
+    					if ($final > 1)
+    						$final = 1;
     					
-    					if ($goal->percent < $average) {
+    					if ($goal->percent < $final) {
     						$data = array(
     								'user_id' => Auth::user()->id,
     								'created_at' => $goal->created_at
@@ -178,7 +191,7 @@ class CalendarController extends Controller
     						// store the percentage in the database
     						DB::table('endurance_goals')
     						->where($data)
-    						->update(['percent' => $average]);
+    						->update(['percent' => $final]);
     					}
     				}
     			}
@@ -201,27 +214,40 @@ class CalendarController extends Controller
     		$workout->save();
     		
     		// Calculate the percentage of the percentage
-    		$newVol= $workout->sets/($workout->time/60);
-    		$volGoal= 0;
     		$goals = DB::table('flexibility_goals')->where('user_id', Auth::user()->id)->get();
     		foreach ($goals as $goal) {
     			// only do if names match each other
     			if ($goal->name == $workout->name) {
     				if ($goal->percent < 1.00) {
-    					$volGoal = $goal->sets/($goal->time/60);
-    					$average = $newVol / $volGoal;
-    					if ($average > 1)
-    						$average = 1;
-    					
-    					if ($goal->percent < $average) {
+    					$percent = 0;
+    					$percent1 = 0;
+    					$percent2 = 0;
+    					if ($workout->sets >= $goal->sets) {
+    						$percent1 += 1;
+    					}
+    					else {
+    						$percent1 += $workout->sets / $goal->sets;
+    					}
+    					if ($workout->time >= $goal->time) {
+    						$percent2 += 1;
+    					}
+    					else {
+    						$percent2 += $workout->time / $goal->time;
+    					}
+    					$percent = $percent1 + $percent2;
+    					$final = $percent / 2;
+    					if ($final > 1)
+    						$final = 1;
+    						
+    					if ($goal->percent < $final) {
     						$data = array(
-    								'user_id' => Auth::user()->id,
-    								'created_at' => $goal->created_at
-    						);
-    						// store the percentage in the database
-    						DB::table('flexibility_goals')
+    							'user_id' => Auth::user()->id,
+    							'created_at' => $goal->created_at
+    					);
+    					// store the percentage in the database
+    					DB::table('flexibility_goals')
     						->where($data)
-    						->update(['percent' => $average]);
+    						->update(['percent' => $final]);
     					}
     				}
     			}
@@ -245,27 +271,40 @@ class CalendarController extends Controller
     		$workout->save();
     		
     		// Calculate the percentage of the percentage
-    		$newVol = $workout->sets/($workout->time/60);
-    		$volGoal= 0;
     		$goals = DB::table('balance_goals')->where('user_id', Auth::user()->id)->get();
     		foreach ($goals as $goal) {
     			// only do if names match each other
     			if ($goal->name == $workout->name) {
     				if ($goal->percent < 1.00) {
-    					$volGoal = $goal->sets/($goal->time/60);
-    					$average = $newVol / $volGoal;
-    					if ($average > 1)
-    						$average = 1;
-    					
-    					if ($goal->percent < $average) {
+    					$percent = 0;
+    					$percent1 = 0;
+    					$percent2 = 0;
+    					if ($workout->sets >= $goal->sets) {
+    						$percent1 += 1;
+    					}
+    					else {
+    						$percent1 += $workout->sets / $goal->sets;
+    					}
+    					if ($workout->time >= $goal->time) {
+    						$percent2 += 1;
+    					}
+    					else {
+    						$percent2 += $workout->time / $goal->time;
+    					}
+    					$percent = $percent1 + $percent2;
+    					$final = $percent / 2;
+    					if ($final > 1)
+    						$final = 1;
+    						
+    					if ($goal->percent < $final) {
     						$data = array(
-    								'user_id' => Auth::user()->id,
-    								'created_at' => $goal->created_at
-    						);
-    						// store the percentage in the database
-    						DB::table('balance_goals')
+    							'user_id' => Auth::user()->id,
+    							'created_at' => $goal->created_at
+    					);
+    					// store the percentage in the database
+    					DB::table('balance_goals')
     						->where($data)
-    						->update(['percent' => $average]);
+    						->update(['percent' => $final]);
     					}
     				}
     			}
