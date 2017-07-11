@@ -101,18 +101,17 @@ class HomeController extends Controller
         {
             // Athlete Id
             $athleteId = DB::table('users')->where('email', $request->email)->first();
-
             // gets both Athlete and Coach
             $data = array(
                 'athlete_id' => $athleteId->id,
-                'coach_id'=> $bio->id
-                );
+                'coach_id'=> $bio->user_id
+           );
 
             // Updates the Still connected only where Athlete and Coach
             $connected = DB::table('athlete_to_coaches')
             ->where($data)
             ->update(['still_connected' => 1]);
-
+            
             return redirect()->back();
         } else {        // Deleting connection
             if ($bio->identity != NULL) {
