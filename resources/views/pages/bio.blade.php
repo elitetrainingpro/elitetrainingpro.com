@@ -12,10 +12,15 @@
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=rmgyrwthrrr2h5weft0b1mllmieqrg3hmdrsg58sym44ure3"></script>
     <script>
     tinymce.init({
-        selector: 'textarea',
-        plugins: 'link',
-        menubar: false
+    selector: 'textarea',
+    plugins: 'link',
+    menubar: false,
+    setup: function (editor) {
+        editor.on('change', function () {
+            tinymce.triggerSave();
         });
+    }
+});
     </script>
 @endsection
 
