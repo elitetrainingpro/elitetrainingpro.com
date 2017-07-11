@@ -44,9 +44,10 @@
 /* For The secondary people*/
 #Profile
 {
-    margin: 40px auto;
-    width: 425px;
+    margin-bottom: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: mintcream;
+    height: 250px;
 }
 
 #Lefts
