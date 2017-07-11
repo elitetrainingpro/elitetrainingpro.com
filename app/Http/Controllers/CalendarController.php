@@ -111,6 +111,8 @@ class CalendarController extends Controller
     		$workout->save();
     		
     		// Calculate the percentage of the percentage
+    		$newVol = $workout->weight * $workout->reps * $workout->sets;
+    		$volGoal= 0;
     		$goals = DB::table('strength_goals')->where('user_id', Auth::user()->id)->get();
     		
     		// check to see if current goal percent database is < than the new percent
